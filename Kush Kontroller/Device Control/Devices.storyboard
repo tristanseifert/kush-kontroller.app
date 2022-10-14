@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JGU-cQ-oi0">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Devices-->
+        <scene sceneID="bNW-8r-0gl">
+            <objects>
+                <tableViewController id="JGU-cQ-oi0" customClass="DeviceTableViewController" customModule="Kush_Kontroller" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="epW-cE-3if">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="128" id="Ma1-8n-BQA">
+                                <rect key="frame" x="0.0" y="50" width="393" height="128"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ma1-8n-BQA" id="Lkf-qE-SnM">
+                                    <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="128"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="av.remote" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="tsA-Ib-E4A">
+                                            <rect key="frame" x="10" y="15.333333333333336" width="72" height="97.333333333333329"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="72" id="8qk-KK-TJf"/>
+                                                <constraint firstAttribute="height" constant="96" id="wDD-HA-0bB"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Device Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0M9-26-s3b">
+                                            <rect key="frame" x="90" y="24" width="106.66666666666669" height="21"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Device kind" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZPp-rC-WZf">
+                                            <rect key="frame" x="90" y="48.666666666666664" width="89" height="20.999999999999993"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="ZPp-rC-WZf" firstAttribute="top" secondItem="0M9-26-s3b" secondAttribute="bottom" multiplier="0.9" constant="8" symbolic="YES" id="6F9-py-Nkn"/>
+                                        <constraint firstItem="tsA-Ib-E4A" firstAttribute="centerY" secondItem="Lkf-qE-SnM" secondAttribute="centerY" id="Anc-eU-tog"/>
+                                        <constraint firstItem="ZPp-rC-WZf" firstAttribute="leading" secondItem="0M9-26-s3b" secondAttribute="leading" id="K4k-ap-CLg"/>
+                                        <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="ZPp-rC-WZf" secondAttribute="trailing" constant="10" id="bP4-cl-sHN"/>
+                                        <constraint firstItem="0M9-26-s3b" firstAttribute="top" secondItem="Lkf-qE-SnM" secondAttribute="topMargin" constant="13" id="ePS-j3-do1"/>
+                                        <constraint firstItem="tsA-Ib-E4A" firstAttribute="leading" secondItem="Lkf-qE-SnM" secondAttribute="leading" constant="10" id="idF-Ay-z8W"/>
+                                        <constraint firstItem="0M9-26-s3b" firstAttribute="leading" secondItem="tsA-Ib-E4A" secondAttribute="trailing" constant="8" symbolic="YES" id="vgn-gk-AEh"/>
+                                        <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="0M9-26-s3b" secondAttribute="trailing" constant="10" id="wF1-Ku-ghf"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="JGU-cQ-oi0" id="GyW-Ob-fOM"/>
+                            <outlet property="delegate" destination="JGU-cQ-oi0" id="e66-6c-odW"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Devices" id="x3S-o1-ALM">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="sCB-k1-3im">
+                            <connections>
+                                <action selector="addDevice:" destination="JGU-cQ-oi0" id="BrH-FA-42Y"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="1bd-EY-Ibb"/>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ae7-oo-7zX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139.69465648854961" y="-14.084507042253522"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="av.remote" catalog="system" width="80" height="128"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
