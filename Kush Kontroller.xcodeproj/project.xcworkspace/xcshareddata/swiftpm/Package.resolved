@@ -1,0 +1,50 @@
+{
+  "pins" : [
+    {
+      "identity" : "drops",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/omaralbeik/Drops.git",
+      "state" : {
+        "revision" : "8638804eda5a6108b186c81c8e1e4a2209a51bef",
+        "version" : "1.6.0"
+      }
+    },
+    {
+      "identity" : "hgcircularslider",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/HamzaGhazouani/HGCircularSlider",
+      "state" : {
+        "revision" : "2b98462d32bf7211851aa73537dbaba5dd80229e",
+        "version" : "2.2.1"
+      }
+    },
+    {
+      "identity" : "jgprogresshud",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/JonasGessner/JGProgressHUD.git",
+      "state" : {
+        "revision" : "78d7cd35f1d90ff74fd82e486f2cbe4b24be8cf9",
+        "version" : "2.2.0"
+      }
+    },
+    {
+      "identity" : "permissionskit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sparrowcode/PermissionsKit",
+      "state" : {
+        "revision" : "01d64ef804ba3e537de17db5eb2c68e9121e1193",
+        "version" : "9.0.1"
+      }
+    },
+    {
+      "identity" : "spconfetti",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ivanvorobei/SPConfetti",
+      "state" : {
+        "revision" : "257a8674c62212a3919abd1f9cb31dc2fc7b0992",
+        "version" : "1.4.1"
+      }
+    }
+  ],
+  "version" : 2
+}

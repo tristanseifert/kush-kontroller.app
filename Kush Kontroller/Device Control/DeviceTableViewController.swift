@@ -84,12 +84,4 @@ class DeviceTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
-    // MARK: - Actions
-    /**
-     * @brief Open the pairing workflow
-     */
-    @IBAction func addDevice(_ sender: Any) {
-        
-    }
 }

@@ -16,6 +16,15 @@
 		6A0173BC28FA13140008A6E8 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A0173BB28FA13140008A6E8 /* Settings.storyboard */; };
 		6A0173BF28FA15B40008A6E8 /* Devices.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A0173BE28FA15B40008A6E8 /* Devices.storyboard */; };
 		6A0173C128FA165F0008A6E8 /* DeviceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0173C028FA165F0008A6E8 /* DeviceTableViewController.swift */; };
+		6A0173C428FA19770008A6E8 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 6A0173C328FA19770008A6E8 /* JGProgressHUD */; };
+		6A0173C728FA19980008A6E8 /* Drops in Frameworks */ = {isa = PBXBuildFile; productRef = 6A0173C628FA19980008A6E8 /* Drops */; };
+		6A0173CA28FA1ACC0008A6E8 /* SPConfetti in Frameworks */ = {isa = PBXBuildFile; productRef = 6A0173C928FA1ACC0008A6E8 /* SPConfetti */; };
+		6A0173CD28FA1AD80008A6E8 /* HGCircularSlider in Frameworks */ = {isa = PBXBuildFile; productRef = 6A0173CC28FA1AD80008A6E8 /* HGCircularSlider */; };
+		6A0173D028FA1C870008A6E8 /* Pairing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A0173CF28FA1C870008A6E8 /* Pairing.storyboard */; };
+		6A0173D228FA1DAB0008A6E8 /* PairingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0173D128FA1DAB0008A6E8 /* PairingViewController.swift */; };
+		6ABC30BA28FA1E9500525475 /* BluetoothPermission in Frameworks */ = {isa = PBXBuildFile; productRef = 6ABC30B928FA1E9500525475 /* BluetoothPermission */; };
+		6ABC30BC28FA203700525475 /* SupportedDevicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABC30BB28FA203700525475 /* SupportedDevicesTableViewController.swift */; };
+		6ABC30BE28FA205B00525475 /* Supported Devices.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6ABC30BD28FA205B00525475 /* Supported Devices.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +39,10 @@
 		6A0173BB28FA13140008A6E8 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		6A0173BE28FA15B40008A6E8 /* Devices.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Devices.storyboard; sourceTree = "<group>"; };
 		6A0173C028FA165F0008A6E8 /* DeviceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTableViewController.swift; sourceTree = "<group>"; };
+		6A0173CF28FA1C870008A6E8 /* Pairing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Pairing.storyboard; sourceTree = "<group>"; };
+		6A0173D128FA1DAB0008A6E8 /* PairingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingViewController.swift; sourceTree = "<group>"; };
+		6ABC30BB28FA203700525475 /* SupportedDevicesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportedDevicesTableViewController.swift; sourceTree = "<group>"; };
+		6ABC30BD28FA205B00525475 /* Supported Devices.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Supported Devices.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +50,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A0173C728FA19980008A6E8 /* Drops in Frameworks */,
+				6A0173CD28FA1AD80008A6E8 /* HGCircularSlider in Frameworks */,
+				6A0173CA28FA1ACC0008A6E8 /* SPConfetti in Frameworks */,
+				6A0173C428FA19770008A6E8 /* JGProgressHUD in Frameworks */,
+				6ABC30BA28FA1E9500525475 /* BluetoothPermission in Frameworks */,
 				6A0173B528FA0FD70008A6E8 /* CoreBluetooth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,6 +82,7 @@
 		6A01739E28FA0A690008A6E8 /* Kush Kontroller */ = {
 			isa = PBXGroup;
 			children = (
+				6A0173CE28FA1C770008A6E8 /* Device Pairing */,
 				6A0173BD28FA15A90008A6E8 /* Device Control */,
 				6A0173BA28FA13050008A6E8 /* Settings */,
 				6A0173B828FA109A0008A6E8 /* Main View */,
@@ -125,6 +144,17 @@
 			path = "Device Control";
 			sourceTree = "<group>";
 		};
+		6A0173CE28FA1C770008A6E8 /* Device Pairing */ = {
+			isa = PBXGroup;
+			children = (
+				6A0173CF28FA1C870008A6E8 /* Pairing.storyboard */,
+				6A0173D128FA1DAB0008A6E8 /* PairingViewController.swift */,
+				6ABC30BB28FA203700525475 /* SupportedDevicesTableViewController.swift */,
+				6ABC30BD28FA205B00525475 /* Supported Devices.plist */,
+			);
+			path = "Device Pairing";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -141,6 +171,13 @@
 			dependencies = (
 			);
 			name = "Kush Kontroller";
+			packageProductDependencies = (
+				6A0173C328FA19770008A6E8 /* JGProgressHUD */,
+				6A0173C628FA19980008A6E8 /* Drops */,
+				6A0173C928FA1ACC0008A6E8 /* SPConfetti */,
+				6A0173CC28FA1AD80008A6E8 /* HGCircularSlider */,
+				6ABC30B928FA1E9500525475 /* BluetoothPermission */,
+			);
 			productName = "Kush Kontroller";
 			productReference = 6A01739C28FA0A690008A6E8 /* Kush Kontroller.app */;
 			productType = "com.apple.product-type.application";
@@ -169,6 +206,13 @@
 				Base,
 			);
 			mainGroup = 6A01739328FA0A680008A6E8;
+			packageReferences = (
+				6A0173C228FA19770008A6E8 /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
+				6A0173C528FA19980008A6E8 /* XCRemoteSwiftPackageReference "Drops" */,
+				6A0173C828FA1ACC0008A6E8 /* XCRemoteSwiftPackageReference "SPConfetti" */,
+				6A0173CB28FA1AD80008A6E8 /* XCRemoteSwiftPackageReference "HGCircularSlider" */,
+				6ABC30B828FA1E9500525475 /* XCRemoteSwiftPackageReference "PermissionsKit" */,
+			);
 			productRefGroup = 6A01739D28FA0A690008A6E8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -183,11 +227,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6ABC30BE28FA205B00525475 /* Supported Devices.plist in Resources */,
 				6A0173AC28FA0A6A0008A6E8 /* LaunchScreen.storyboard in Resources */,
 				6A0173A928FA0A6A0008A6E8 /* Assets.xcassets in Resources */,
 				6A0173A728FA0A690008A6E8 /* Main.storyboard in Resources */,
 				6A0173BF28FA15B40008A6E8 /* Devices.storyboard in Resources */,
 				6A0173BC28FA13140008A6E8 /* Settings.storyboard in Resources */,
+				6A0173D028FA1C870008A6E8 /* Pairing.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +247,8 @@
 				6A0173A028FA0A690008A6E8 /* AppDelegate.swift in Sources */,
 				6A0173C128FA165F0008A6E8 /* DeviceTableViewController.swift in Sources */,
 				6A0173A228FA0A690008A6E8 /* SceneDelegate.swift in Sources */,
+				6ABC30BC28FA203700525475 /* SupportedDevicesTableViewController.swift in Sources */,
+				6A0173D228FA1DAB0008A6E8 /* PairingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +470,77 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6A0173C228FA19770008A6E8 /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		6A0173C528FA19980008A6E8 /* XCRemoteSwiftPackageReference "Drops" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/omaralbeik/Drops.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		6A0173C828FA1ACC0008A6E8 /* XCRemoteSwiftPackageReference "SPConfetti" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ivanvorobei/SPConfetti";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		6A0173CB28FA1AD80008A6E8 /* XCRemoteSwiftPackageReference "HGCircularSlider" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/HamzaGhazouani/HGCircularSlider";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		6ABC30B828FA1E9500525475 /* XCRemoteSwiftPackageReference "PermissionsKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparrowcode/PermissionsKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6A0173C328FA19770008A6E8 /* JGProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6A0173C228FA19770008A6E8 /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
+			productName = JGProgressHUD;
+		};
+		6A0173C628FA19980008A6E8 /* Drops */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6A0173C528FA19980008A6E8 /* XCRemoteSwiftPackageReference "Drops" */;
+			productName = Drops;
+		};
+		6A0173C928FA1ACC0008A6E8 /* SPConfetti */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6A0173C828FA1ACC0008A6E8 /* XCRemoteSwiftPackageReference "SPConfetti" */;
+			productName = SPConfetti;
+		};
+		6A0173CC28FA1AD80008A6E8 /* HGCircularSlider */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6A0173CB28FA1AD80008A6E8 /* XCRemoteSwiftPackageReference "HGCircularSlider" */;
+			productName = HGCircularSlider;
+		};
+		6ABC30B928FA1E9500525475 /* BluetoothPermission */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6ABC30B828FA1E9500525475 /* XCRemoteSwiftPackageReference "PermissionsKit" */;
+			productName = BluetoothPermission;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6A01739428FA0A680008A6E8 /* Project object */;
 }

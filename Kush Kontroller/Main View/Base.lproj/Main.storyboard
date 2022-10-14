@@ -57,7 +57,7 @@
         <scene sceneID="ebr-eb-IJl">
             <objects>
                 <navigationController id="YUe-nY-LLp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Devices" image="radiowaves.right" catalog="system" id="Wpq-L6-qKX"/>
+                    <tabBarItem key="tabBarItem" title="Devices" image="wave.3.left" catalog="system" id="Wpq-L6-qKX"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="aXp-bR-Wdd">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -83,6 +83,6 @@
     </scenes>
     <resources>
         <image name="gear" catalog="system" width="128" height="122"/>
-        <image name="radiowaves.right" catalog="system" width="83" height="128"/>
+        <image name="wave.3.left" catalog="system" width="83" height="128"/>
     </resources>
 </document>

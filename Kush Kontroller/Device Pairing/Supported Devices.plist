@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>displayName</key>
+		<string>PAX Labs</string>
+		<key>devices</key>
+		<array>
+			<dict>
+				<key>displayName</key>
+				<string>Pax 3</string>
+			</dict>
+			<dict>
+				<key>displayName</key>
+				<string>Pax Era</string>
+			</dict>
+		</array>
+	</dict>
+</array>
+</plist>

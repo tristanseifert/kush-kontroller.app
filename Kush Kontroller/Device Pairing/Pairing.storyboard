@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sOy-Fj-f9W">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="d64-ZC-lOV">
+            <objects>
+                <navigationController modalPresentationStyle="pageSheet" id="sOy-Fj-f9W" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nuP-gH-d9f">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="fnK-ba-hin" kind="relationship" relationship="rootViewController" id="BLz-cv-V09"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rU3-1v-XsC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <navigationItem title="Title" id="E9u-3o-AoE"/>
+            </objects>
+            <point key="canvasLocation" x="-1836" y="-64"/>
+        </scene>
+        <!--Add Device-->
+        <scene sceneID="7jN-cD-wRB">
+            <objects>
+                <viewController id="fnK-ba-hin" customClass="PairingViewController" customModule="Kush_Kontroller" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FrS-VQ-1gt">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lGR-3z-nmu">
+                                <rect key="frame" x="0.0" y="463" width="393" height="320"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="320" id="yLy-cx-LF4"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="d31-4t-eRl" kind="embed" id="QCu-n7-Uh0"/>
+                                </connections>
+                            </containerView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="kTy-Ml-rOf">
+                                <rect key="frame" x="20" y="196" width="353" height="113"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pair Device" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fKz-KD-ggr">
+                                        <rect key="frame" x="82.000000000000014" y="0.0" width="189.33333333333337" height="40.666666666666664"/>
+                                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="34"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select your device type from the list below. If you do not see your device listed, it's likely not yet supported." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C64-7Z-NPl">
+                                        <rect key="frame" x="0.0" y="48.66666666666665" width="353" height="64.333333333333314"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ZR2-zX-X5b"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="kTy-Ml-rOf" secondAttribute="trailing" constant="20" symbolic="YES" id="2Ab-Xt-Hd4"/>
+                            <constraint firstItem="lGR-3z-nmu" firstAttribute="leading" secondItem="ZR2-zX-X5b" secondAttribute="leading" id="7ve-3H-S7d"/>
+                            <constraint firstItem="lGR-3z-nmu" firstAttribute="trailing" secondItem="ZR2-zX-X5b" secondAttribute="trailing" id="EVG-6k-APF"/>
+                            <constraint firstItem="kTy-Ml-rOf" firstAttribute="top" secondItem="ZR2-zX-X5b" secondAttribute="top" constant="140" id="KdV-w4-dnC"/>
+                            <constraint firstItem="kTy-Ml-rOf" firstAttribute="leading" secondItem="FrS-VQ-1gt" secondAttribute="leading" constant="20" symbolic="YES" id="lQc-dL-B59"/>
+                            <constraint firstItem="lGR-3z-nmu" firstAttribute="bottom" secondItem="ZR2-zX-X5b" secondAttribute="bottom" id="qvR-pT-hOv"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Device" id="14s-hc-saM">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="p5X-JN-jjh">
+                            <connections>
+                                <action selector="cancel:" destination="fnK-ba-hin" id="wEK-et-kjx"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kES-bE-EgW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-924.4274809160305" y="-64.08450704225352"/>
+        </scene>
+        <!--Supported Vapes-->
+        <scene sceneID="jOH-Ut-OWQ">
+            <objects>
+                <tableViewController title="Supported Vapes" id="d31-4t-eRl" customClass="SupportedDevicesTableViewController" customModule="Kush_Kontroller" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="2lw-iM-kRI">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="320"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="DeviceType" textLabel="O2M-Id-BCM" style="IBUITableViewCellStyleDefault" id="ZlW-HY-mUC">
+                                <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZlW-HY-mUC" id="Xfg-ny-J7b">
+                                    <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Device Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="O2M-Id-BCM">
+                                            <rect key="frame" x="20" y="0.0" width="334.66666666666669" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="d31-4t-eRl" id="9eY-U1-vzm"/>
+                            <outlet property="delegate" destination="d31-4t-eRl" id="Bcj-Nk-5rC"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZQo-ko-io9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-924" y="520"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
