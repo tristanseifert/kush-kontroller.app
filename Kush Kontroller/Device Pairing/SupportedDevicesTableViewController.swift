@@ -7,10 +7,23 @@
 
 import UIKit
 
+import PermissionsKit
+import BluetoothPermission
+
 /**
  @brief Show a list of supported devices
  */
 class SupportedDevicesTableViewController: UITableViewController {
+    /**
+     * @brief Bitset of required permissions
+     */
+    struct RequiredPermissions: OptionSet {
+        let rawValue: UInt
+        
+        /// Requires access to the device's Bluetooth
+        static let bluetooth = RequiredPermissions(rawValue: 1 << 0)
+    }
+    
     /**
      * @brief List of supported devices
      *
@@ -85,7 +98,18 @@ class SupportedDevicesTableViewController: UITableViewController {
      * Invoked before attempting to pair a device, to ensure we have the required permissions.
      */
     private func ensurePermissions(_ deviceInfo: [String: Any]) {
-        // TODO: implement this
+        // fetch the permissions
+        guard let permissionsInt = deviceInfo["permissions"] as? UInt else {
+            return
+        }
+        let permissions = RequiredPermissions(rawValue: permissionsInt)
+
+        // bluetooth required?
+        if permissions.contains(.bluetooth) {
+            Permission.bluetooth.request {
+                print("New bluetooth permission: \(Permission.bluetooth.status)")
+            }
+        }
     }
 
     /**
@@ -97,8 +121,34 @@ class SupportedDevicesTableViewController: UITableViewController {
         let devices = self.manufacturers[indexPath.section]["devices"] as! [[String: Any]]
         let device = devices[indexPath.row]
         
+        // acquire required permissions
         self.ensurePermissions(device)
-
-        print("Pairing device: \(device["displayName"])")
+        
+        // instantiate the appropriate handler, then present it
+        let handler = device["handler"] as! String
+        let identifier = device["identifier"] as! String
+        
+        switch handler {
+        case "pax":
+            let sb = UIStoryboard(name: "PairingPax", bundle: nil)
+            let vc = sb.instantiateInitialViewController() as! PaxPairingViewController
+            
+            switch identifier {
+            case "vape.pax.pax3":
+                vc.type = .Pax3
+            case "vape.pax.pax-era":
+                vc.type = .PaxEra
+            default:
+                fatalError("unsupported pax: \(identifier)")
+            }
+            
+            self.parent!.navigationController?.pushViewController(vc, animated: true)
+            
+        default:
+            fatalError("unsupported handler \(handler)")
+        }
+        
+        // once we're in the spicy zone, do not allow swipe down dismissal
+        self.parent!.navigationController?.isModalInPresentation = true
     }
 }

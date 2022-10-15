@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DeviceTableViewController: UITableViewController {
+class DeviceTableViewController: UITableViewController {    
     /**
      * @brief Set up the view controller
      */

@@ -15,11 +15,20 @@ import UIKit
  * also request required permissions here.
  */
 class PairingViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    /**
+     * @brief Allow dismissing with swipe
+     */
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.isModalInPresentation = false
     }
     
 

@@ -10,10 +10,22 @@
 			<dict>
 				<key>displayName</key>
 				<string>Pax 3</string>
+				<key>identifier</key>
+				<string>vape.pax.pax3</string>
+				<key>permissions</key>
+				<integer>1</integer>
+				<key>handler</key>
+				<string>pax</string>
 			</dict>
 			<dict>
+				<key>identifier</key>
+				<string>vape.pax.pax-era</string>
 				<key>displayName</key>
 				<string>Pax Era</string>
+				<key>permissions</key>
+				<integer>1</integer>
+				<key>handler</key>
+				<string>pax</string>
 			</dict>
 		</array>
 	</dict>
