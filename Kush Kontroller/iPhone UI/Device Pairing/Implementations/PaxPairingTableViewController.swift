@@ -139,10 +139,11 @@ class PaxPairingTableViewController: UITableViewController, CBCentralManagerDele
             Self.L.warning("Ignoring peripheral: \(peripheral) data \(advertisementData)")
             return
         }
-        Self.L.trace("Discovered device \"\(name)\" (RSSI \(RSSI)); bonus data \(manufData)")
+        Self.L.trace("Discovered device \"\(name)\" (RSSI \(RSSI)); bonus data \(manufData.hexEncodedString())")
        
         // create a record for it and update table
-        let device = Device(name: name, idData: manufData)
+        var device = Device(name: name, idData: manufData)
+        device.peripheral = peripheral
         
         DispatchQueue.main.async {
             self.tableView.beginUpdates()

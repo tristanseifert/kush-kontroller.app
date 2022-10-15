@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 import OSLog
 import CoreBluetooth
 
@@ -23,11 +24,22 @@ class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDele
     @IBOutlet var doneButton: UIBarButtonItem!
     /// Central image view
     @IBOutlet var image: UIImageView!
+    /// View to show when still working
+    @IBOutlet var stillWorkingHeading: UIView!
+    /// Done view
+    @IBOutlet var doneHeading: UIView!
     
     /// Bluetooth central (received from previous view controller)
     internal var central: CBCentralManager!
     /// Device to complete connecting to
     internal var device: PaxPairingTableViewController.Device!
+    
+    /// used to determine the type of device we are connecting to
+    private lazy var probulator = PaxDeviceProber()
+    /// Pax device we've connected to
+    private var paxDevice: PaxDevice! = nil
+    /// Subscribers on device attributes
+    private var subscribers: [AnyCancellable] = []
     
     /**
      * @brief Reset view to default state
@@ -36,7 +48,14 @@ class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDele
         super.viewWillAppear(animated)
         
         self.doneButton.isHidden = true
+        self.navigationItem.hidesBackButton = false
+        self.doneHeading.isHidden = true
+        self.stillWorkingHeading.isHidden = false
+        self.image.tintColor = nil
         self.image.image = UIImage(systemName: "checklist")
+        
+        self.paxDevice = nil
+        self.subscribers.removeAll()
     }
     
     /**
@@ -47,8 +66,84 @@ class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDele
         
         // "steal" the delegate for the central and attempt to connect
         self.central.delegate = self
+        
+        guard let peripheral = self.device.peripheral else {
+            fatalError("missing peripheral object")
+        }
+        
+        Self.L.trace("Connecting Pax: \(peripheral.identifier) (\(self.device.name)")
+        self.central.connect(peripheral, options: nil)
     }
-
+    
+    /**
+     * @brief Disconnect from device
+     */
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.subscribers.removeAll()
+        if let device = self.paxDevice {
+            device.stop()
+        }
+        self.paxDevice = nil
+    }
+    
+    // MARK: Device Completion
+    /**
+     * @brief Invoked when a device connection has been fully set up
+     *
+     * This implies basic information has been read out, so we can go ahead and store the required
+     * data for pairing and dismiss the view.
+     */
+    private func deviceCompleted() {
+        guard let device = self.paxDevice else {
+            fatalError("device is required")
+        }
+        guard let serial = device.serial, let model = device.model else {
+            fatalError("missing device info!")
+        }
+        
+        // log the message and pair record
+        Self.L.info("Pairing device: \(model) s/n \(serial)")
+        
+        self.addPairingRecord(device)
+        DispatchQueue.main.async {
+            self.updateUiForSuccess(device)
+        }
+    }
+    
+    /**
+     * @brief Add a pairing record for this device
+     */
+    private func addPairingRecord(_ device: PaxDevice) {
+        // TODO: implement
+    }
+    
+    // MARK: UI Actions
+    /**
+     * @brief Dismiss the view
+     */
+    @IBAction func doneButtonAction(_ sender: Any?) {
+        self.dismiss(animated: true)
+    }
+    
+    /**
+     * @brief Update the UI to indicate success
+     */
+    private func updateUiForSuccess(_ device: PaxDevice) {
+        UIView.transition(with: self.image.superview!, duration: 0.33, animations: {
+            self.image.image = UIImage(systemName: "checkmark.circle.fill")
+            self.image.tintColor = UIColor(named: "SuccessCheckColor")
+            self.doneHeading.isHidden = false
+            self.stillWorkingHeading.isHidden = true
+            self.doneButton.isHidden = false
+            self.navigationItem.hidesBackButton = true
+            
+            // allow swipe down closing again
+            self.navigationController?.isModalInPresentation = false
+        })
+    }
+    
     // MARK: - Bluetooth handling
     // MARK: Central delegate
     /**
@@ -63,6 +158,32 @@ class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDele
      */
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         Self.L.trace("Connected device: \(peripheral.identifier)")
+        
+        self.probulator.probe(peripheral) { res in
+            switch res {
+                case .success(let device):
+                    // store for later
+                    self.paxDevice = device
+                
+                    // subscribe for changes
+                    self.subscribers.append(device.$supportedAttributes.sink() {
+                        if !$0.isEmpty {
+                            Self.L.debug("Supported attributes: \($0)")
+                            self.deviceCompleted()
+                        }
+                    })
+                
+                    // set up the device connection
+                    Self.L.trace("Created Pax device: \(device)")
+                    device.start()
+                    
+                case .failure(let err):
+                    Self.L.error("Failed to probe device: \(err.localizedDescription)")
+                    DispatchQueue.main.async {
+                        self.presentError(err)
+                    }
+            }
+        }
     }
     
     /**
@@ -72,8 +193,15 @@ class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDele
      */
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         Self.L.error("Failed to connect device \(peripheral.identifier): \(error)")
-        
-        // create alert
+        self.presentError(error)
+    }
+    
+    /**
+     * @brief Present an error
+     *
+     * The error is formatted in an alert and we pop back to the previous view.
+     */
+    private func presentError(_ error: Error?, goBack: Bool = true) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
         alert.title = NSLocalizedString("Failed to Connect", comment: "connect failure")
         
@@ -87,6 +215,8 @@ class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDele
         self.navigationController?.present(alert, animated: true)
         
         // go back to the device selector
-        self.navigationController?.popViewController(animated: true)
+        if goBack {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }
