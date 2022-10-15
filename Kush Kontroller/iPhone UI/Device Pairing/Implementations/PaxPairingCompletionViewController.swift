@@ -23,6 +23,9 @@ class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDele
     /// Logging instance for this view controller
     static let L = Logger(subsystem: "me.blraaz.kushkontroller", category: "pairing.pax")
     
+    /// Interval for pairing timeout (seconds)
+    static let PairingTimeout: TimeInterval = 20
+    
     /// Nav bar item on the right to close the view controller
     @IBOutlet var doneButton: UIBarButtonItem!
     /// Central image view
@@ -43,6 +46,8 @@ class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDele
     private var paxDevice: PaxDevice! = nil
     /// Subscribers on device attributes
     private var subscribers: [AnyCancellable] = []
+    /// Pairing timeout timer
+    private var timeoutTimer: Timer? = nil
     
     /**
      * @brief Reset view to default state
@@ -67,6 +72,14 @@ class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDele
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        // start a timer
+        self.timeoutTimer = Timer(timeInterval: Self.PairingTimeout, repeats: false, block: { _ in
+            DispatchQueue.main.async {
+                self.presentError(PairingError.timeout)
+            }
+        })
+        RunLoop.main.add(self.timeoutTimer!, forMode: .default)
+        
         // "steal" the delegate for the central and attempt to connect
         self.central.delegate = self
         
@@ -90,6 +103,9 @@ class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDele
         }
         self.paxDevice = nil
         
+        self.timeoutTimer?.invalidate()
+        self.timeoutTimer = nil
+        
         // stop confetti
         SPConfetti.stopAnimating()
     }
@@ -111,6 +127,7 @@ class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDele
         
         // log the message and pair record
         Self.L.info("Pairing device: \(model) s/n \(serial)")
+        self.timeoutTimer?.invalidate()
         
         do {
             try self.pairIfNotAlready(device)
@@ -279,6 +296,14 @@ class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDele
      * The error is formatted in an alert and we pop back to the previous view.
      */
     private func presentError(_ error: Error?, goBack: Bool = true) {
+        // cancel the device connection, if any
+        self.subscribers.removeAll()
+        if let peripheral = self.paxDevice.peripheral {
+            self.central.cancelPeripheralConnection(peripheral)
+        }
+        self.paxDevice = nil
+        
+        // create the alert
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
         alert.title = Self.Localized("error.title")
         

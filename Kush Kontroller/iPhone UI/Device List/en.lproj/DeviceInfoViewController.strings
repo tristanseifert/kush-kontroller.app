@@ -1,0 +1,18 @@
+/* 
+  DeviceInfoViewController.strings
+  Kush Kontroller
+
+  Created by Tristan Seifert on 20221014.
+  
+*/
+
+"field.name" = "Display Name";
+"field.serial" = "Serial Number";
+"field.notes" = "Notes";
+
+"timestamp.created" = "Created On";
+"timestamp.modified" = "Last Modified";
+"timestamp.connected" = "Last Connected";
+"timestamp.connected.never" = "Never";
+
+"section.notes" = "Notes";

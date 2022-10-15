@@ -48,4 +48,12 @@ class PairingViewController: UIViewController {
     @IBAction func cancel(_ sender: Any?) {
         self.dismiss(animated: true)
     }
+    
+    /**
+     * @brief More info button
+     */
+    @IBAction func moreInfo(_ sender: Any?) {
+        // TODO: implement
+        print("TODO: show more info!")
+    }
 }

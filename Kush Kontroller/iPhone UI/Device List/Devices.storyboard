@@ -85,6 +85,49 @@
             </objects>
             <point key="canvasLocation" x="714" y="-258"/>
         </scene>
+        <!--Device Details-->
+        <scene sceneID="Rb2-gf-u8W">
+            <objects>
+                <tableViewController id="AI1-fK-MQa" customClass="DeviceInfoViewController" customModule="Kush_Kontroller" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="mEf-Zn-3X7">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="AI1-fK-MQa" id="4JZ-Bb-NW2"/>
+                            <outlet property="delegate" destination="AI1-fK-MQa" id="RNb-au-8ud"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Device Details" id="H3j-YE-PZI">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="JZ0-B2-jgk">
+                            <connections>
+                                <action selector="done:" destination="AI1-fK-MQa" id="Cj9-B9-LAa"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qlD-Yh-B1V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1749" y="118"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="bWM-L9-Zqe">
+            <objects>
+                <navigationController storyboardIdentifier="InfoController" id="mKK-At-vyf" sceneMemberID="viewController">
+                    <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MkW-mQ-xnU">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="AI1-fK-MQa" kind="relationship" relationship="rootViewController" id="0hY-ba-xKF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Twm-yO-b1o" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="931" y="118"/>
+        </scene>
     </scenes>
     <resources>
         <image name="av.remote" catalog="system" width="80" height="128"/>

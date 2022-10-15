@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "eureka",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/xmartlabs/Eureka",
+      "state" : {
+        "revision" : "b6e35acf77a5551070afa6248935ec68e71f22af",
+        "version" : "5.4.0"
+      }
+    },
+    {
       "identity" : "hgcircularslider",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/HamzaGhazouani/HGCircularSlider",

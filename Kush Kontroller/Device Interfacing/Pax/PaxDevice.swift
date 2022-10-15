@@ -19,7 +19,7 @@ class PaxDevice: NSObject, CBPeripheralDelegate {
     private static let L = Logger(subsystem: "me.blraaz.kushkontroller", category: "device.pax.base")
     
     /// Peripheral representing the remote end of the BT LE connection
-    private var peripheral: CBPeripheral!
+    internal var peripheral: CBPeripheral!
     
     /// Service handle for the Pax service
     private var paxService: CBService!

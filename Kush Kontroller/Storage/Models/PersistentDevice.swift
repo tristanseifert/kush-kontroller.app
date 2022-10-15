@@ -23,6 +23,8 @@ extension PersistentDevice {
      *
      * Updates the "last modified" timestamp
      */
+    // TODO: this does NOT work!
+    /*
     public override func willSave() {
         super.willSave()
         
@@ -30,4 +32,5 @@ extension PersistentDevice {
             self.lastModified = Date.now
         }
     }
+    */
 }

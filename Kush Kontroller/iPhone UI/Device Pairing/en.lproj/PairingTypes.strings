@@ -9,5 +9,5 @@
 "PairingError.deviceExists.desc" = "This device has already been paired.";
 "PairingError.deviceExists.recovery" = "Connect to the device from the main screen, or delete it if you want to pair it anew.";
 
-"PairingError.timeout.desc" = "Pairing timed out";
-"PairingError.timeout.desc" = "Ensure that Bluetooth is enabled, that the device is powered on and in range, then try again.";
+"PairingError.timeout.desc" = "The pairing operation timed out.";
+"PairingError.timeout.recovery" = "Ensure that Bluetooth is enabled, that the device is powered on and in range, then try again.";

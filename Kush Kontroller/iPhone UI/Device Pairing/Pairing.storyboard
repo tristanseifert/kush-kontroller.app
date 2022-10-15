@@ -34,7 +34,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lGR-3z-nmu">
-                                <rect key="frame" x="0.0" y="345" width="393" height="438"/>
+                                <rect key="frame" x="0.0" y="345.33333333333326" width="393" height="437.66666666666674"/>
                                 <connections>
                                     <segue destination="d31-4t-eRl" kind="embed" identifier="supportedDevicesList" id="QCu-n7-Uh0"/>
                                 </connections>
@@ -67,6 +67,9 @@
                                 <rect key="frame" x="142" y="291" width="109.33333333333331" height="34.333333333333314"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="More Info…"/>
+                                <connections>
+                                    <action selector="moreInfo:" destination="fnK-ba-hin" eventType="primaryActionTriggered" id="Vhw-MW-JIX"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZR2-zX-X5b"/>
@@ -103,13 +106,13 @@
         <scene sceneID="jOH-Ut-OWQ">
             <objects>
                 <tableViewController title="Supported Vapes" id="d31-4t-eRl" customClass="SupportedDevicesTableViewController" customModule="Kush_Kontroller" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="2lw-iM-kRI">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="438"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="2lw-iM-kRI">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="437.66666666666669"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="DeviceType" textLabel="O2M-Id-BCM" style="IBUITableViewCellStyleDefault" id="ZlW-HY-mUC">
-                                <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                <rect key="frame" x="0.0" y="55.333332061767578" width="393" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZlW-HY-mUC" id="Xfg-ny-J7b">
                                     <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="43.666667938232422"/>

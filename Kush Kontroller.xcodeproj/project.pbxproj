@@ -22,6 +22,9 @@
 		6A0173CD28FA1AD80008A6E8 /* HGCircularSlider in Frameworks */ = {isa = PBXBuildFile; productRef = 6A0173CC28FA1AD80008A6E8 /* HGCircularSlider */; };
 		6A0173D028FA1C870008A6E8 /* Pairing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A0173CF28FA1C870008A6E8 /* Pairing.storyboard */; };
 		6A0173D228FA1DAB0008A6E8 /* PairingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0173D128FA1DAB0008A6E8 /* PairingViewController.swift */; };
+		6AB079C328FA840B0025CD3E /* Eureka in Frameworks */ = {isa = PBXBuildFile; productRef = 6AB079C228FA840B0025CD3E /* Eureka */; };
+		6AB079C528FA841E0025CD3E /* DeviceInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB079C428FA841E0025CD3E /* DeviceInfoViewController.swift */; };
+		6AB079C828FA86820025CD3E /* DeviceInfoViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6AB079CA28FA86820025CD3E /* DeviceInfoViewController.strings */; };
 		6ABC30BA28FA1E9500525475 /* BluetoothPermission in Frameworks */ = {isa = PBXBuildFile; productRef = 6ABC30B928FA1E9500525475 /* BluetoothPermission */; };
 		6ABC30BC28FA203700525475 /* SupportedDevicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABC30BB28FA203700525475 /* SupportedDevicesTableViewController.swift */; };
 		6ABC30BE28FA205B00525475 /* Supported Devices.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6ABC30BD28FA205B00525475 /* Supported Devices.plist */; };
@@ -60,6 +63,8 @@
 		6A0173C028FA165F0008A6E8 /* DeviceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTableViewController.swift; sourceTree = "<group>"; };
 		6A0173CF28FA1C870008A6E8 /* Pairing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Pairing.storyboard; sourceTree = "<group>"; };
 		6A0173D128FA1DAB0008A6E8 /* PairingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingViewController.swift; sourceTree = "<group>"; };
+		6AB079C428FA841E0025CD3E /* DeviceInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoViewController.swift; sourceTree = "<group>"; };
+		6AB079C928FA86820025CD3E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DeviceInfoViewController.strings; sourceTree = "<group>"; };
 		6ABC30BB28FA203700525475 /* SupportedDevicesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportedDevicesTableViewController.swift; sourceTree = "<group>"; };
 		6ABC30BD28FA205B00525475 /* Supported Devices.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Supported Devices.plist"; sourceTree = "<group>"; };
 		6ABC30C028FA2F2300525475 /* PaxPairingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaxPairingViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +95,7 @@
 				6A0173C728FA19980008A6E8 /* Drops in Frameworks */,
 				6A0173CD28FA1AD80008A6E8 /* HGCircularSlider in Frameworks */,
 				6A0173CA28FA1ACC0008A6E8 /* SPConfetti in Frameworks */,
+				6AB079C328FA840B0025CD3E /* Eureka in Frameworks */,
 				6A0173C428FA19770008A6E8 /* JGProgressHUD in Frameworks */,
 				6ABC30BA28FA1E9500525475 /* BluetoothPermission in Frameworks */,
 				6A0173B528FA0FD70008A6E8 /* CoreBluetooth.framework in Frameworks */,
@@ -173,14 +179,16 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		6A0173BD28FA15A90008A6E8 /* Device Control */ = {
+		6A0173BD28FA15A90008A6E8 /* Device List */ = {
 			isa = PBXGroup;
 			children = (
 				6A0173BE28FA15B40008A6E8 /* Devices.storyboard */,
 				6A0173C028FA165F0008A6E8 /* DeviceTableViewController.swift */,
 				6ABC30F428FA6D0200525475 /* DeviceTableViewController.strings */,
+				6AB079C428FA841E0025CD3E /* DeviceInfoViewController.swift */,
+				6AB079CA28FA86820025CD3E /* DeviceInfoViewController.strings */,
 			);
-			path = "Device Control";
+			path = "Device List";
 			sourceTree = "<group>";
 		};
 		6A0173CE28FA1C770008A6E8 /* Device Pairing */ = {
@@ -213,7 +221,7 @@
 			children = (
 				6A0173B828FA109A0008A6E8 /* Main View */,
 				6A0173BA28FA13050008A6E8 /* Settings */,
-				6A0173BD28FA15A90008A6E8 /* Device Control */,
+				6A0173BD28FA15A90008A6E8 /* Device List */,
 				6A0173CE28FA1C770008A6E8 /* Device Pairing */,
 			);
 			path = "iPhone UI";
@@ -290,6 +298,7 @@
 				6A0173CC28FA1AD80008A6E8 /* HGCircularSlider */,
 				6ABC30B928FA1E9500525475 /* BluetoothPermission */,
 				6ABC30D628FA47E600525475 /* CryptoSwift */,
+				6AB079C228FA840B0025CD3E /* Eureka */,
 			);
 			productName = "Kush Kontroller";
 			productReference = 6A01739C28FA0A690008A6E8 /* Kush Kontroller.app */;
@@ -326,6 +335,7 @@
 				6A0173CB28FA1AD80008A6E8 /* XCRemoteSwiftPackageReference "HGCircularSlider" */,
 				6ABC30B828FA1E9500525475 /* XCRemoteSwiftPackageReference "PermissionsKit" */,
 				6ABC30D528FA47E600525475 /* XCRemoteSwiftPackageReference "CryptoSwift" */,
+				6AB079C128FA840B0025CD3E /* XCRemoteSwiftPackageReference "Eureka" */,
 			);
 			productRefGroup = 6A01739D28FA0A690008A6E8 /* Products */;
 			projectDirPath = "";
@@ -345,6 +355,7 @@
 				6A0173AC28FA0A6A0008A6E8 /* LaunchScreen.storyboard in Resources */,
 				6A0173A928FA0A6A0008A6E8 /* Assets.xcassets in Resources */,
 				6ABC310228FA78FA00525475 /* PairingTypes.strings in Resources */,
+				6AB079C828FA86820025CD3E /* DeviceInfoViewController.strings in Resources */,
 				6A0173A728FA0A690008A6E8 /* Main.storyboard in Resources */,
 				6ABC30F628FA6DB800525475 /* PaxPairingCompletionViewController.strings in Resources */,
 				6A0173BF28FA15B40008A6E8 /* Devices.storyboard in Resources */,
@@ -381,6 +392,7 @@
 				6ABC30FF28FA787B00525475 /* Types.swift in Sources */,
 				6ABC30DD28FA542900525475 /* DataStore.swift in Sources */,
 				6ABC30D428FA47C400525475 /* PaxEraDevice.swift in Sources */,
+				6AB079C528FA841E0025CD3E /* DeviceInfoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +413,14 @@
 				6A0173AB28FA0A6A0008A6E8 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		6AB079CA28FA86820025CD3E /* DeviceInfoViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6AB079C928FA86820025CD3E /* en */,
+			);
+			name = DeviceInfoViewController.strings;
 			sourceTree = "<group>";
 		};
 		6ABC30F428FA6D0200525475 /* DeviceTableViewController.strings */ = {
@@ -662,6 +682,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		6AB079C128FA840B0025CD3E /* XCRemoteSwiftPackageReference "Eureka" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/xmartlabs/Eureka";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		6ABC30B828FA1E9500525475 /* XCRemoteSwiftPackageReference "PermissionsKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sparrowcode/PermissionsKit";
@@ -700,6 +728,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6A0173CB28FA1AD80008A6E8 /* XCRemoteSwiftPackageReference "HGCircularSlider" */;
 			productName = HGCircularSlider;
+		};
+		6AB079C228FA840B0025CD3E /* Eureka */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6AB079C128FA840B0025CD3E /* XCRemoteSwiftPackageReference "Eureka" */;
+			productName = Eureka;
 		};
 		6ABC30B928FA1E9500525475 /* BluetoothPermission */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -7,6 +7,7 @@
         <attribute name="lastConnected" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="lastModified" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="serial" attributeType="String"/>
         <attribute name="type" attributeType="String"/>
     </entity>

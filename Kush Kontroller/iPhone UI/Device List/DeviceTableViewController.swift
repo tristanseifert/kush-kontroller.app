@@ -120,10 +120,12 @@ class DeviceTableViewController: UITableViewController, NSFetchedResultsControll
      * Open a management pane for this device.
      */
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        let device = self.frc.object(at: indexPath)
-        Self.L.trace("Show info for: \(device)")
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: "InfoController") as! UINavigationController
+        let info = vc.viewControllers.first! as! DeviceInfoViewController
         
-        // TODO: implement
+        info.device = self.frc.object(at: indexPath)
+        
+        self.navigationController?.present(vc, animated:true)
     }
     
     /**
@@ -132,10 +134,9 @@ class DeviceTableViewController: UITableViewController, NSFetchedResultsControll
      * Connect to the specified device.
      */
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO: implement
         let device = self.frc.object(at: indexPath)
         Self.L.trace("Selected device: \(device)")
-        
-        // TODO: implement
     }
     
     // MARK: Editing
