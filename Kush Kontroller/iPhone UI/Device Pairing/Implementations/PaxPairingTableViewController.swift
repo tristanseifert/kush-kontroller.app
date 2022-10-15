@@ -28,8 +28,6 @@ class PaxPairingTableViewController: UITableViewController, CBCentralManagerDele
     
     /// Logging instance for this view controller
     static let L = Logger(subsystem: "me.blraaz.kushkontroller", category: "pairing.pax")
-    /// UUID for Pax devices
-    static let DeviceUuid = UUID(uuidString: "8E320200-64D2-11E6-BDF4-0800200C9A66")!
     
     /// Dispatch queue for Bluetooth related operations
     private var btQueue = DispatchQueue(label: "Pax BT discovery", qos: .userInitiated, attributes: [], autoreleaseFrequency: .inherit)
@@ -179,7 +177,7 @@ class PaxPairingTableViewController: UITableViewController, CBCentralManagerDele
         
         // scan begin
         self.central.delegate = self
-        self.central.scanForPeripherals(withServices: [CBUUID(nsuuid: Self.DeviceUuid)], options: nil)
+        self.central.scanForPeripherals(withServices: [CBUUID(nsuuid: PaxDevice.ServiceUuid)], options: nil)
     }
     
     /**

@@ -17,6 +17,8 @@ import CryptoSwift
  */
 class PaxDevice: NSObject, CBPeripheralDelegate {
     private static let L = Logger(subsystem: "me.blraaz.kushkontroller", category: "device.pax.base")
+    /// UUID for the Pax devices' primary service
+    public static let ServiceUuid = UUID(uuidString: "8E320200-64D2-11E6-BDF4-0800200C9A66")!
     
     /// Peripheral representing the remote end of the BT LE connection
     internal var peripheral: CBPeripheral!
@@ -33,7 +35,7 @@ class PaxDevice: NSObject, CBPeripheralDelegate {
     private var deviceKey: Data!
     
     /// Set when the device has been fully initialized and can be used
-    @objc private(set) public dynamic var isUsable: Bool = false
+    private(set) public dynamic var isUsable: Bool = false
     /// Set when we've established the connection
     private var isConnectionSetUp: Bool = false
     
@@ -41,15 +43,15 @@ class PaxDevice: NSObject, CBPeripheralDelegate {
     internal(set) public var type: DeviceType = .Unknown
     
     /// Serial number of the device, as read during connection establishment
-    @Published @objc private(set) public dynamic var serial: String!
+    @Published private(set) public dynamic var serial: String!
     /// Manufacturer of the device
-    @Published @objc private(set) public dynamic var manufacturer: String!
+    @Published private(set) public dynamic var manufacturer: String!
     /// Model number of the device
-    @Published @objc private(set) public dynamic var model: String!
+    @Published private(set) public dynamic var model: String!
     /// Hardware revision
-    @Published @objc private(set) public dynamic var hwVersion: String!
+    @Published private(set) public dynamic var hwVersion: String!
     /// Software revision
-    @Published @objc private(set) public dynamic var swVersion: String!
+    @Published private(set) public dynamic var swVersion: String!
     
     /// Supported message types/attributes
     @Published private(set) public var supportedAttributes = Set<PaxMessageType>()
