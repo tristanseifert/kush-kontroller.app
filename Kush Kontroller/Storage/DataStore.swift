@@ -57,4 +57,11 @@ class DataStore {
     public func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
         self.persistentContainer.performBackgroundTask(block)
     }
+    
+    /**
+     * @brief Create new background context
+     */
+    public func makeBackgroundContext() -> NSManagedObjectContext {
+        return self.persistentContainer.newBackgroundContext()
+    }
 }

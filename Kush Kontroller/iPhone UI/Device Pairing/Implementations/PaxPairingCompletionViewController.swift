@@ -9,6 +9,9 @@ import UIKit
 import Combine
 import OSLog
 import CoreBluetooth
+import CoreData
+
+import SPConfetti
 
 /**
  * @brief Final stage of Pax pairing controller
@@ -16,7 +19,7 @@ import CoreBluetooth
  * This dude connects to the device, and probes it to see what kind it is. It then fetches some
  * more information that's used to create the pairing record.
  */
-class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDelegate {
+class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDelegate {    
     /// Logging instance for this view controller
     static let L = Logger(subsystem: "me.blraaz.kushkontroller", category: "pairing.pax")
     
@@ -86,6 +89,9 @@ class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDele
             device.stop()
         }
         self.paxDevice = nil
+        
+        // stop confetti
+        SPConfetti.stopAnimating()
     }
     
     // MARK: Device Completion
@@ -107,21 +113,59 @@ class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDele
         Self.L.info("Pairing device: \(model) s/n \(serial)")
         
         do {
-            try self.addPairingRecord(device)
+            try self.pairIfNotAlready(device)
             
             DispatchQueue.main.async {
                 self.updateUiForSuccess(device)
             }
         } catch {
             Self.L.error("Failed to add pairing record: \(error)")
-            self.presentError(error)
+            DispatchQueue.main.async {
+                self.presentError(error)
+            }
         }
     }
     
     /**
      * @brief Add a pairing record for this device
      */
-    private func addPairingRecord(_ device: PaxDevice) throws {
+    private func pairIfNotAlready(_ device: PaxDevice) throws {
+        // get device type
+        var deviceType: String!
+        switch device.type {
+            case .Pax3:
+                deviceType = "vape.pax.pax3"
+            case .PaxEra:
+                deviceType = "vape.pax.pax-era"
+                
+            default:
+                fatalError("unsupported pax type: \(device.type)")
+        }
+        
+        // check if we've already got this kind
+        let frq = NSFetchRequest<PersistentDevice>(entityName: "Device")
+        frq.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
+            NSPredicate(format: "%K == %@ ", "type", deviceType),
+            NSPredicate(format: "%K == %@", "serial", device.serial!)
+        ])
+        
+        let ctx = DataStore.shared.makeBackgroundContext()
+        let count = ctx.performAndWait {
+            return try! ctx.count(for: frq)
+        }
+        
+        if count != 0 {
+            throw PairingError.deviceExists
+        }
+        
+        // we don't, so go ahead and insert it
+        try self.insertPairingRecord(device, deviceType)
+    }
+    
+    /**
+     * @brief Insert pairing record
+     */
+    private func insertPairingRecord(_ device: PaxDevice, _ type: String) throws {
         // create the auxiliary data
         let auxData: [String: Any] = [
             "manufacturerData": self.device.idData,
@@ -140,16 +184,7 @@ class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDele
             record.displayName = self.device.name
             record.serial = device.serial!
             record.bonusData = data
-            
-            switch device.type {
-            case .Pax3:
-                record.type = "vape.pax.pax3"
-            case .PaxEra:
-                record.type = "vape.pax.pax-era"
-                
-            default:
-                fatalError("unsupported pax type: \(device.type)")
-            }
+            record.type = type
             
             // save changes
             try! DataStore.shared.mainContext.save()
@@ -178,6 +213,9 @@ class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDele
             
             // allow swipe down closing again
             self.navigationController?.isModalInPresentation = false
+            
+            // confetti :D
+            SPConfetti.startAnimating(.fullWidthToDown, particles: [.star, .circle, .polygon, .triangle, .arc])
         })
     }
     
@@ -230,7 +268,9 @@ class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDele
      */
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         Self.L.error("Failed to connect device \(peripheral.identifier): \(error)")
-        self.presentError(error)
+        DispatchQueue.main.async {
+            self.presentError(error)
+        }
     }
     
     /**
@@ -249,11 +289,20 @@ class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDele
         }
         
         alert.addAction(UIAlertAction(title: Self.Localized("error.dismiss"), style: .default))
-        self.navigationController?.present(alert, animated: true)
         
         // go back to the device selector
         if goBack {
             self.navigationController?.popViewController(animated: true)
+            
+            if let coordinator = self.transitionCoordinator {
+                coordinator.animateAlongsideTransition(in: nil, animation: { _ in
+                    self.navigationController?.present(alert, animated: true)
+                })
+            } else {
+                self.navigationController?.present(alert, animated: false)
+            }
+        } else {
+            self.navigationController?.present(alert, animated: true)
         }
     }
     

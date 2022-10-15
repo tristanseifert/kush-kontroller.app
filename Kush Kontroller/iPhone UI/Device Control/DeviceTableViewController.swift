@@ -160,7 +160,7 @@ class DeviceTableViewController: UITableViewController, NSFetchedResultsControll
             alert.message = Self.Localized("delete.message")
             
             alert.addAction(UIAlertAction(title: Self.Localized("delete.action.cancel"), style: .cancel))
-            alert.addAction(UIAlertAction(title: Self.Localized("delete.action.cancel"), style: .destructive, handler: { _ in
+            alert.addAction(UIAlertAction(title: Self.Localized("delete.action.delete"), style: .destructive, handler: { _ in
                 Self.L.trace("Delete device: \(device)")
                 DataStore.shared.mainContext.delete(device)
                 do {
