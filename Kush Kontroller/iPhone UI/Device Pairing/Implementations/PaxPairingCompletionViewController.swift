@@ -299,6 +299,7 @@ class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDele
         // cancel the device connection, if any
         self.subscribers.removeAll()
         if let peripheral = self.paxDevice?.peripheral {
+            self.paxDevice?.stop()
             self.central.cancelPeripheralConnection(peripheral)
         }
         self.paxDevice = nil

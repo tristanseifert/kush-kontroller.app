@@ -29,6 +29,8 @@ protocol PaxConnectorDelegate: AnyObject {
  * @brief Errors that may occur during Pax connection
  */
 enum PaxConnectorError: LocalizedError {
+    /// Miscellaneous error
+    case miscError
     /// Persistent data is missing the bonus data field
     case missingAuxData
     /// Bonus data is invalid
@@ -41,6 +43,8 @@ enum PaxConnectorError: LocalizedError {
     /// Return the localized error string
     public var errorDescription: String? {
         switch self {
+        case .miscError:
+            return NSLocalizedString("error.miscError.desc", tableName: "PaxConnector", comment: "")
         case .missingAuxData:
             return NSLocalizedString("error.missingAuxData.desc", tableName: "PaxConnector", comment: "")
         case .invalidAuxData:
@@ -74,8 +78,8 @@ class PaxConnector: NSObject, CBCentralManagerDelegate {
     /// Interval for probing timeout (seconds)
     static let ProbingTimeout: TimeInterval = 10
     
-    /// Pax connector delegate
-    public weak var delegate: PaxConnectorDelegate? = nil
+    /// Connection callback
+    private var callback: (Result<PaxDevice, Error>) -> Void
     
     /// used to determine the type of device we are connecting to
     private lazy var probulator = PaxDeviceProber()
@@ -112,10 +116,12 @@ class PaxConnector: NSObject, CBCentralManagerDelegate {
      * @param device Database device instance
      * @param central Bluetooth central to use for connection. Assumed to be already powered on
      */
-    init(_ device: PersistentDevice, central: CBCentralManager) throws {
-        super.init()
+    init(_ device: PersistentDevice, central: CBCentralManager,
+         callback: @escaping (Result<PaxDevice, Error>) -> Void) throws {
+        self.callback = callback
         self.dbDevice = device
         self.central = central
+        super.init()
         
         // decode information
         guard let auxData = device.bonusData else {
@@ -238,7 +244,11 @@ class PaxConnector: NSObject, CBCentralManagerDelegate {
         self.peripheral = nil
         
         // notify delegate
-        self.delegate?.paxConnector(self, failedToConnect: self.dbDevice, withError: error)
+        if let error = error {
+            self.callback(.failure(error))
+        } else {
+            self.callback(.failure(PaxConnectorError.miscError))
+        }
     }
     
     // MARK: State helpers
@@ -277,7 +287,7 @@ class PaxConnector: NSObject, CBCentralManagerDelegate {
         
         // invoke delegate
         Self.L.info("Connection success: \(dev)")
-        self.delegate?.paxConnector(self, connectedDevice: dev)
+        self.callback(.success(dev))
     }
     
     /**
@@ -309,6 +319,6 @@ class PaxConnector: NSObject, CBCentralManagerDelegate {
         
         // propagate the error to our delegate
         Self.L.error("Device connection failed: \(error)")
-        self.delegate?.paxConnector(self, failedToConnect: self.dbDevice, withError: error)
+        self.callback(.failure(error))
     }
 }

@@ -9,14 +9,19 @@ import UIKit
 import CoreData
 import OSLog
 
+import JGProgressHUD
+
 class DeviceTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     /// Logging instance for this view controller
     static let L = Logger(subsystem: "me.blraaz.kushkontroller", category: "DeviceTableViewController")
     
     /// Device type mapping
-    var deviceNames: [String: String] = [:]
+    private var deviceNames: [String: String] = [:]
     /// Fetched results controller (for devices)
-    var frc: NSFetchedResultsController<PersistentDevice>!
+    private var frc: NSFetchedResultsController<PersistentDevice>!
+    
+    /// Device connector
+    private var connector: DeviceConnector? = nil
     
     /**
      * @brief Set up the view controller
@@ -134,9 +139,71 @@ class DeviceTableViewController: UITableViewController, NSFetchedResultsControll
      * Connect to the specified device.
      */
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: implement
         let device = self.frc.object(at: indexPath)
         Self.L.trace("Selected device: \(device)")
+        
+        // show loading indicator
+        let hud = JGProgressHUD()
+        hud.textLabel.text = Self.Localized("connecting.title")
+        hud.show(in: self.view.superview!, animated: true)
+        
+        // create handler and connect
+        do {
+            self.connector = try DeviceConnector(device, owner: self, callback: { res in
+                switch res {
+                case .success(let device):
+                    // TODO: present view controller for this
+                    DispatchQueue.main.async {
+                        hud.indicatorView = JGProgressHUDSuccessIndicatorView()
+                        hud.dismiss(animated: true)
+                    }
+                    break
+                    
+                case .failure(let error):
+                    Self.L.error("connection failed: \(error)")
+                    
+                    DispatchQueue.main.async {
+                        self.presentConnectionError(error)
+                        
+                        hud.dismiss(animated: false)
+                        tableView.deselectRow(at: indexPath, animated: true)
+                    }
+                }
+                self.connector = nil
+            })
+        }
+        // TODO: refactor the common handling for errors
+        catch DeviceConnectorError.unsupportedDevice {
+            Self.L.error("unsupported device type: \(device)")
+            
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+            alert.title = Self.Localized("error.unsupported.title")
+            alert.message = Self.Localized("error.unsupported.message")
+            alert.addAction(UIAlertAction(title: Self.Localized("error.unsupported.dismiss"), style: .default))
+            
+            hud.dismiss(animated: false)
+            self.present(alert, animated: true)
+            tableView.deselectRow(at: indexPath, animated: true)
+        } catch {
+            Self.L.error("Generic connection error: \(error)")
+            
+            self.presentConnectionError(error)
+            hud.dismiss(animated: false)
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
+    
+    /**
+     * @brief Present a generic connection error
+     */
+    private func presentConnectionError(_ error: Error) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        alert.title = Self.Localized("error.generic.title")
+        alert.message = error.localizedDescription
+        
+        alert.addAction(UIAlertAction(title: Self.Localized("error.generic.dismiss"), style: .default))
+        
+        self.present(alert, animated: true)
     }
     
     // MARK: Editing

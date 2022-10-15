@@ -9,3 +9,12 @@
 "delete.message" = "Are you sure you want to delete this device? All settings will be lost, and you must pair it anew.";
 "delete.action.cancel" = "Cancel";
 "delete.action.delete" = "Delete Device";
+
+"connecting.title" = "Connecting Device…";
+
+"error.unsupported.title" = "Unsupported Device";
+"error.unsupported.message" = "The selected device type is not supported by this version of the app.\n\nTry removing the device, and pairing it again.";
+"error.unsupported.dismiss" = "Dismiss";
+
+"error.generic.title" = "Connection Error";
+"error.generic.dismiss" = "Dismiss";
