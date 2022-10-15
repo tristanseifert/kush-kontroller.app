@@ -6,15 +6,32 @@
 //
 
 import UIKit
+import OSLog
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
+    private static let L = Logger(subsystem: "me.blraaz.kushkontroller", category: "AppDelegate")
+    
+    /**
+     * @brief Application finished launching
+     */
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // set up the data store
+        let _ = DataStore.shared
+        
         // Override point for customization after application launch.
         return true
+    }
+    
+    /**
+     * @brief Quiesce any pending stuff
+     */
+    func applicationWillResignActive(_ application: UIApplication) {
+        do {
+            try DataStore.shared.save()
+        } catch let err {
+            Self.L.error("Failed to save data: \(err)")
+        }
     }
 
     // MARK: UISceneSession Lifecycle

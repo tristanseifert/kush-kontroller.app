@@ -1,0 +1,11 @@
+/* 
+  PaxPairingCompletionViewController.strings
+  Kush Kontroller
+
+  Created by Tristan Seifert on 20221014.
+  
+*/
+
+"error.title" = "Pairing Failed";
+"error.message" = "An unknown error caused pairing to fail.\nEnsure the device is in range and powered on.";
+"error.dismiss" = "Dismiss";

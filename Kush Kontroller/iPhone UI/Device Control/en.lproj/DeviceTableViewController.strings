@@ -1,0 +1,11 @@
+/* 
+  DeviceTableViewController.strings
+  Kush Kontroller
+
+  Created by Tristan Seifert on 20221014.
+  
+*/
+"delete.title" = "Delete Device \"%@\"";
+"delete.message" = "Are you sure you want to delete this device? All settings will be lost, and you must pair it anew.";
+"delete.action.cancel" = "Cancel";
+"delete.action.delete" = "Delete Device";

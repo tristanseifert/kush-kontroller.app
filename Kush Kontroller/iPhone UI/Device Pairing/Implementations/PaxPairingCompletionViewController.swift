@@ -106,17 +106,54 @@ class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDele
         // log the message and pair record
         Self.L.info("Pairing device: \(model) s/n \(serial)")
         
-        self.addPairingRecord(device)
-        DispatchQueue.main.async {
-            self.updateUiForSuccess(device)
+        do {
+            try self.addPairingRecord(device)
+            
+            DispatchQueue.main.async {
+                self.updateUiForSuccess(device)
+            }
+        } catch {
+            Self.L.error("Failed to add pairing record: \(error)")
+            self.presentError(error)
         }
     }
     
     /**
      * @brief Add a pairing record for this device
      */
-    private func addPairingRecord(_ device: PaxDevice) {
-        // TODO: implement
+    private func addPairingRecord(_ device: PaxDevice) throws {
+        // create the auxiliary data
+        let auxData: [String: Any] = [
+            "manufacturerData": self.device.idData,
+            "btName": self.device.name,
+            "model": device.model!,
+            "serial": device.serial!,
+        ]
+        
+        let data = try PropertyListSerialization.data(fromPropertyList: auxData, format: .binary, options: 0)
+        
+        // create a model and store it
+        DataStore.shared.mainContext.perform {
+            // new object
+            let record = PersistentDevice(context: DataStore.shared.mainContext)
+            record.name = self.device.name
+            record.displayName = self.device.name
+            record.serial = device.serial!
+            record.bonusData = data
+            
+            switch device.type {
+            case .Pax3:
+                record.type = "vape.pax.pax3"
+            case .PaxEra:
+                record.type = "vape.pax.pax-era"
+                
+            default:
+                fatalError("unsupported pax type: \(device.type)")
+            }
+            
+            // save changes
+            try! DataStore.shared.mainContext.save()
+        }
     }
     
     // MARK: UI Actions
@@ -150,7 +187,7 @@ class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDele
      * @brief Handle central state changes
      */
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        Self.L.info("Central state changed: \(central.state.rawValue)")
+        // don't really need to do anything here?
     }
     
     /**
@@ -203,20 +240,24 @@ class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDele
      */
     private func presentError(_ error: Error?, goBack: Bool = true) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        alert.title = NSLocalizedString("Failed to Connect", comment: "connect failure")
+        alert.title = Self.Localized("error.title")
         
         if let desc = error?.localizedDescription {
             alert.message = desc
         } else {
-            alert.message = NSLocalizedString("Check that the device is powered on.", comment: "connect failure no error")
+            alert.message = Self.Localized("error.message")
         }
         
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Dismiss", comment: "connect failure"), style: .default))
+        alert.addAction(UIAlertAction(title: Self.Localized("error.dismiss"), style: .default))
         self.navigationController?.present(alert, animated: true)
         
         // go back to the device selector
         if goBack {
             self.navigationController?.popViewController(animated: true)
         }
+    }
+    
+    static private func Localized(_ key: String) -> String {
+        return NSLocalizedString(key, tableName: "PaxPairingCompletionViewController", comment: "")
     }
 }
