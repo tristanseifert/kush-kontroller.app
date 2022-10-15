@@ -139,6 +139,15 @@ class PaxPairingTableViewController: UITableViewController, CBCentralManagerDele
             Self.L.warning("Ignoring peripheral: \(peripheral) data \(advertisementData)")
             return
         }
+        // ignore duplicate devices (by checking bonus data)
+        for dev in self.devices {
+            // starting at byte 2, there are 8 ASCII bytes of serial number
+            if dev.idData.subdata(in: 2..<10) == manufData.subdata(in: 2..<10) {
+                Self.L.warning("Ignoring duplicate: \(peripheral) data \(advertisementData)")
+                return
+            }
+        }
+
         Self.L.trace("Discovered device \"\(name)\" (RSSI \(RSSI)); bonus data \(manufData.hexEncodedString())")
        
         // create a record for it and update table

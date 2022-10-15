@@ -43,7 +43,7 @@ class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDele
     /// used to determine the type of device we are connecting to
     private lazy var probulator = PaxDeviceProber()
     /// Pax device we've connected to
-    private var paxDevice: PaxDevice! = nil
+    private var paxDevice: PaxDevice? = nil
     /// Subscribers on device attributes
     private var subscribers: [AnyCancellable] = []
     /// Pairing timeout timer
@@ -87,7 +87,7 @@ class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDele
             fatalError("missing peripheral object")
         }
         
-        Self.L.trace("Connecting Pax: \(peripheral.identifier) (\(self.device.name)")
+        Self.L.trace("Connecting Pax: \(peripheral.identifier) (\(self.device.name))")
         self.central.connect(peripheral, options: nil)
     }
     
@@ -298,7 +298,7 @@ class PaxPairingCompletionViewController: UIViewController, CBCentralManagerDele
     private func presentError(_ error: Error?, goBack: Bool = true) {
         // cancel the device connection, if any
         self.subscribers.removeAll()
-        if let peripheral = self.paxDevice.peripheral {
+        if let peripheral = self.paxDevice?.peripheral {
             self.central.cancelPeripheralConnection(peripheral)
         }
         self.paxDevice = nil
