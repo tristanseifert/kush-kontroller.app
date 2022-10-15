@@ -56,7 +56,7 @@ class PaxPairingTableViewController: UITableViewController, CBCentralManagerDele
         super.viewWillAppear(animated)
         
         if self.central.state == .poweredOn {
-            try self.startScanning()
+            self.startScanning()
         }
     }
     

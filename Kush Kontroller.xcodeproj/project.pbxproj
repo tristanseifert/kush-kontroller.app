@@ -90,10 +90,8 @@
 		6A01739E28FA0A690008A6E8 /* Kush Kontroller */ = {
 			isa = PBXGroup;
 			children = (
-				6A0173CE28FA1C770008A6E8 /* Device Pairing */,
-				6A0173BD28FA15A90008A6E8 /* Device Control */,
-				6A0173BA28FA13050008A6E8 /* Settings */,
-				6A0173B828FA109A0008A6E8 /* Main View */,
+				6ABC30C828FA472500525475 /* iPhone UI */,
+				6ABC30C928FA477400525475 /* Device Interfacing */,
 				6A0173B928FA10B00008A6E8 /* App */,
 				6A0173B728FA10410008A6E8 /* Assets */,
 			);
@@ -158,7 +156,6 @@
 				6A0173CF28FA1C870008A6E8 /* Pairing.storyboard */,
 				6A0173D128FA1DAB0008A6E8 /* PairingViewController.swift */,
 				6ABC30BB28FA203700525475 /* SupportedDevicesTableViewController.swift */,
-				6ABC30BD28FA205B00525475 /* Supported Devices.plist */,
 				6ABC30BF28FA2F0F00525475 /* Implementations */,
 			);
 			path = "Device Pairing";
@@ -173,6 +170,33 @@
 				6ABC30C628FA416400525475 /* PaxPairingCompletionViewController.swift */,
 			);
 			path = Implementations;
+			sourceTree = "<group>";
+		};
+		6ABC30C828FA472500525475 /* iPhone UI */ = {
+			isa = PBXGroup;
+			children = (
+				6A0173B828FA109A0008A6E8 /* Main View */,
+				6A0173BA28FA13050008A6E8 /* Settings */,
+				6A0173BD28FA15A90008A6E8 /* Device Control */,
+				6A0173CE28FA1C770008A6E8 /* Device Pairing */,
+			);
+			path = "iPhone UI";
+			sourceTree = "<group>";
+		};
+		6ABC30C928FA477400525475 /* Device Interfacing */ = {
+			isa = PBXGroup;
+			children = (
+				6ABC30CA28FA477D00525475 /* Pax */,
+				6ABC30BD28FA205B00525475 /* Supported Devices.plist */,
+			);
+			path = "Device Interfacing";
+			sourceTree = "<group>";
+		};
+		6ABC30CA28FA477D00525475 /* Pax */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Pax;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
