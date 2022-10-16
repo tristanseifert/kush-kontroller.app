@@ -27,6 +27,10 @@
 		6AB079C828FA86820025CD3E /* DeviceInfoViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6AB079CA28FA86820025CD3E /* DeviceInfoViewController.strings */; };
 		6AB079CD28FB2FDD0025CD3E /* PaxConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB079CC28FB2FDD0025CD3E /* PaxConnector.swift */; };
 		6AB079D328FB47DE0025CD3E /* DeviceConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB079D228FB47DE0025CD3E /* DeviceConnector.swift */; };
+		6AB079D628FB735C0025CD3E /* PaxConnector.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6AB079D828FB735C0025CD3E /* PaxConnector.strings */; };
+		6AB079DC28FB74CE0025CD3E /* PaxControl.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AB079DB28FB74CE0025CD3E /* PaxControl.storyboard */; };
+		6AB079DE28FB75470025CD3E /* Pax3MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB079DD28FB75470025CD3E /* Pax3MainViewController.swift */; };
+		6AB079E128FB7B470025CD3E /* PaxTempControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB079E028FB7B470025CD3E /* PaxTempControl.swift */; };
 		6ABC30BA28FA1E9500525475 /* BluetoothPermission in Frameworks */ = {isa = PBXBuildFile; productRef = 6ABC30B928FA1E9500525475 /* BluetoothPermission */; };
 		6ABC30BC28FA203700525475 /* SupportedDevicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABC30BB28FA203700525475 /* SupportedDevicesTableViewController.swift */; };
 		6ABC30BE28FA205B00525475 /* Supported Devices.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6ABC30BD28FA205B00525475 /* Supported Devices.plist */; };
@@ -69,6 +73,10 @@
 		6AB079C928FA86820025CD3E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DeviceInfoViewController.strings; sourceTree = "<group>"; };
 		6AB079CC28FB2FDD0025CD3E /* PaxConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaxConnector.swift; sourceTree = "<group>"; };
 		6AB079D228FB47DE0025CD3E /* DeviceConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceConnector.swift; sourceTree = "<group>"; };
+		6AB079D728FB735C0025CD3E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PaxConnector.strings; sourceTree = "<group>"; };
+		6AB079DB28FB74CE0025CD3E /* PaxControl.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PaxControl.storyboard; sourceTree = "<group>"; };
+		6AB079DD28FB75470025CD3E /* Pax3MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pax3MainViewController.swift; sourceTree = "<group>"; };
+		6AB079E028FB7B470025CD3E /* PaxTempControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaxTempControl.swift; sourceTree = "<group>"; };
 		6ABC30BB28FA203700525475 /* SupportedDevicesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportedDevicesTableViewController.swift; sourceTree = "<group>"; };
 		6ABC30BD28FA205B00525475 /* Supported Devices.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Supported Devices.plist"; sourceTree = "<group>"; };
 		6ABC30C028FA2F2300525475 /* PaxPairingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaxPairingViewController.swift; sourceTree = "<group>"; };
@@ -225,6 +233,24 @@
 			path = Generic;
 			sourceTree = "<group>";
 		};
+		6AB079D928FB74630025CD3E /* Device Control */ = {
+			isa = PBXGroup;
+			children = (
+				6AB079DA28FB74730025CD3E /* Pax */,
+			);
+			path = "Device Control";
+			sourceTree = "<group>";
+		};
+		6AB079DA28FB74730025CD3E /* Pax */ = {
+			isa = PBXGroup;
+			children = (
+				6AB079DB28FB74CE0025CD3E /* PaxControl.storyboard */,
+				6AB079DD28FB75470025CD3E /* Pax3MainViewController.swift */,
+				6AB079E028FB7B470025CD3E /* PaxTempControl.swift */,
+			);
+			path = Pax;
+			sourceTree = "<group>";
+		};
 		6ABC30BF28FA2F0F00525475 /* Implementations */ = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +269,7 @@
 				6A0173B828FA109A0008A6E8 /* Main View */,
 				6A0173BA28FA13050008A6E8 /* Settings */,
 				6A0173BD28FA15A90008A6E8 /* Device List */,
+				6AB079D928FB74630025CD3E /* Device Control */,
 				6A0173CE28FA1C770008A6E8 /* Device Pairing */,
 			);
 			path = "iPhone UI";
@@ -267,6 +294,7 @@
 				6ABC30CF28FA47C400525475 /* PaxEraDevice.swift */,
 				6ABC30CB28FA47C400525475 /* PaxMessage.swift */,
 				6AB079CC28FB2FDD0025CD3E /* PaxConnector.swift */,
+				6AB079D828FB735C0025CD3E /* PaxConnector.strings */,
 			);
 			path = Pax;
 			sourceTree = "<group>";
@@ -376,11 +404,13 @@
 				6ABC30BE28FA205B00525475 /* Supported Devices.plist in Resources */,
 				6A0173AC28FA0A6A0008A6E8 /* LaunchScreen.storyboard in Resources */,
 				6A0173A928FA0A6A0008A6E8 /* Assets.xcassets in Resources */,
+				6AB079DC28FB74CE0025CD3E /* PaxControl.storyboard in Resources */,
 				6ABC310228FA78FA00525475 /* PairingTypes.strings in Resources */,
 				6AB079C828FA86820025CD3E /* DeviceInfoViewController.strings in Resources */,
 				6A0173A728FA0A690008A6E8 /* Main.storyboard in Resources */,
 				6ABC30F628FA6DB800525475 /* PaxPairingCompletionViewController.strings in Resources */,
 				6A0173BF28FA15B40008A6E8 /* Devices.storyboard in Resources */,
+				6AB079D628FB735C0025CD3E /* PaxConnector.strings in Resources */,
 				6A0173BC28FA13140008A6E8 /* Settings.storyboard in Resources */,
 				6A0173D028FA1C870008A6E8 /* Pairing.storyboard in Resources */,
 				6ABC30C328FA31E200525475 /* PairingPax.storyboard in Resources */,
@@ -397,10 +427,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				6ABC30D228FA47C400525475 /* PaxDeviceProber.swift in Sources */,
+				6AB079E128FB7B470025CD3E /* PaxTempControl.swift in Sources */,
 				6AB079CD28FB2FDD0025CD3E /* PaxConnector.swift in Sources */,
 				6ABC30DA28FA482900525475 /* DataHelpers.swift in Sources */,
 				6ABC30D028FA47C400525475 /* PaxMessage.swift in Sources */,
 				6A0173A028FA0A690008A6E8 /* AppDelegate.swift in Sources */,
+				6AB079DE28FB75470025CD3E /* Pax3MainViewController.swift in Sources */,
 				6ABC30FD28FA727900525475 /* PersistentDevice.swift in Sources */,
 				6ABC30C128FA2F2300525475 /* PaxPairingViewController.swift in Sources */,
 				6A0173C128FA165F0008A6E8 /* DeviceTableViewController.swift in Sources */,
@@ -445,6 +477,14 @@
 				6AB079C928FA86820025CD3E /* en */,
 			);
 			name = DeviceInfoViewController.strings;
+			sourceTree = "<group>";
+		};
+		6AB079D828FB735C0025CD3E /* PaxConnector.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6AB079D728FB735C0025CD3E /* en */,
+			);
+			name = PaxConnector.strings;
 			sourceTree = "<group>";
 		};
 		6ABC30F428FA6D0200525475 /* DeviceTableViewController.strings */ = {

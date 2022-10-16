@@ -72,7 +72,7 @@ class DeviceConnector: NSObject, CBCentralManagerDelegate {
                                              attributes: [],
                                              autoreleaseFrequency: .inherit)
     /// Bluetooth central for discovery and connection
-    private var central: CBCentralManager! = nil
+    public var central: CBCentralManager! = nil
     
     /**
      * @brief Initialize the Bluetooth central

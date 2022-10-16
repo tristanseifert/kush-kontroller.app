@@ -139,8 +139,7 @@ class DeviceTableViewController: UITableViewController, NSFetchedResultsControll
      * Connect to the specified device.
      */
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let device = self.frc.object(at: indexPath)
-        Self.L.trace("Selected device: \(device)")
+        let dbDevice = self.frc.object(at: indexPath)
         
         // show loading indicator
         let hud = JGProgressHUD()
@@ -149,13 +148,21 @@ class DeviceTableViewController: UITableViewController, NSFetchedResultsControll
         
         // create handler and connect
         do {
-            self.connector = try DeviceConnector(device, owner: self, callback: { res in
+            self.connector = try DeviceConnector(dbDevice, owner: self, callback: { res in
                 switch res {
                 case .success(let device):
                     // TODO: present view controller for this
                     DispatchQueue.main.async {
+                        if let pax = device as? PaxDevice {
+                            self.pushDeviceController(dbDevice, forPax: pax)
+                        } else {
+                            fatalError("no view controller for device!")
+                        }
+                        
                         hud.indicatorView = JGProgressHUDSuccessIndicatorView()
                         hud.dismiss(animated: true)
+                        
+                        tableView.deselectRow(at: indexPath, animated: true)
                     }
                     break
                     
@@ -169,12 +176,11 @@ class DeviceTableViewController: UITableViewController, NSFetchedResultsControll
                         tableView.deselectRow(at: indexPath, animated: true)
                     }
                 }
-                self.connector = nil
             })
         }
         // TODO: refactor the common handling for errors
         catch DeviceConnectorError.unsupportedDevice {
-            Self.L.error("unsupported device type: \(device)")
+            Self.L.error("unsupported device type: \(dbDevice)")
             
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
             alert.title = Self.Localized("error.unsupported.title")
@@ -324,5 +330,35 @@ class DeviceTableViewController: UITableViewController, NSFetchedResultsControll
     // MARK: - Helpers
     static private func Localized(_ key: String) -> String {
         return NSLocalizedString(key, tableName: "DeviceTableViewController", comment: "")
+    }
+    
+    // MARK: View controllers
+    /**
+     * @brief Create a view controller for a Pax device
+     */
+    private func pushDeviceController(_ dbDevice: PersistentDevice, forPax device: PaxDevice) {
+        // get device
+        guard let central = self.connector?.central else {
+            fatalError("Central manager required")
+        }
+        
+        // instantiate the appropriate view controller
+        let sb = UIStoryboard(name: "PaxControl", bundle: nil)
+        
+        switch device.type {
+        case .Pax3:
+            let vc = sb.instantiateViewController(withIdentifier: "InitialPax3") as! Pax3MainViewController
+            vc.btCentral = central
+            vc.dbDevice = dbDevice
+            vc.device = device
+            
+            self.navigationController?.pushViewController(vc, animated:true)
+            
+        case .PaxEra:
+            fatalError("Pax Era view not yet implemented: device=\(device)")
+            
+        default:
+            fatalError("invalid Pax device type: \(device.type)")
+        }
     }
 }

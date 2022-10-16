@@ -11,21 +11,6 @@ import OSLog
 import CoreBluetooth
 
 /**
- * @brief Dude for handling the Pax connection process
- */
-protocol PaxConnectorDelegate: AnyObject {
-    /**
-     * @brief Successfully connected the device
-     */
-    func paxConnector(_ connector: PaxConnector, connectedDevice device: PaxDevice)
-    
-    /**
-     * @brief An error occurred during connection
-     */
-    func paxConnector(_ connector: PaxConnector, failedToConnect device: PersistentDevice, withError error: Error?)
-}
-
-/**
  * @brief Errors that may occur during Pax connection
  */
 enum PaxConnectorError: LocalizedError {
@@ -59,6 +44,8 @@ enum PaxConnectorError: LocalizedError {
     /// Recovery suggestion for the error
     public var recoverySuggestion: String? {
         switch self {
+        case .discoveryTimeout:
+            return NSLocalizedString("error.discoveryTimeout.recovery", tableName: "PaxConnector", comment: "")
         default:
             return nil
         }
@@ -318,7 +305,6 @@ class PaxConnector: NSObject, CBCentralManagerDelegate {
         self.resetState()
         
         // propagate the error to our delegate
-        Self.L.error("Device connection failed: \(error)")
         self.callback(.failure(error))
     }
 }

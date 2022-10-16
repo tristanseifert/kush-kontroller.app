@@ -1,0 +1,14 @@
+/* 
+  PaxConnector.strings
+  Kush Kontroller
+
+  Created by Tristan Seifert on 20221015.
+  
+*/
+"error.miscError.desc" = "Unknown error";
+"error.missingAuxData.desc" = "The persistent device is missing bonus data structure.";
+"error.invalidAuxData.desc" = "The persistent device bonus data is invalid or corrupted.";
+"error.discoveryTimeout.desc" = "Connection timed out while waiting for the device to appear.";
+"error.probeTimeout.desc" = "Probing the device timed out.";
+
+"error.discoveryTimeout.recovery" = "Ensure the device is in Bluetooth connection mode by shaking it, and that it is in range.";
