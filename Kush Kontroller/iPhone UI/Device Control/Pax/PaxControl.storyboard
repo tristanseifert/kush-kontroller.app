@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_12" orientation="portrait" appearance="dark"/>
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="UIMenu" message="Requires Xcode 11 or later." minToolsVersion="11.0" requiredIntegratedClassName="UICommandDiff"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fvq-ZQ-yNy" customClass="PaxTempControl" customModule="Kush_Kontroller" customModuleProvider="target">
-                                <rect key="frame" x="20" y="123" width="353" height="353"/>
+                                <rect key="frame" x="10" y="128" width="373" height="373"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Fvq-ZQ-yNy" secondAttribute="height" multiplier="1:1" id="0D1-ae-yMD"/>
@@ -36,23 +37,113 @@
                                         <real key="value" value="190"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="knobWidth">
-                                        <real key="value" value="74"/>
+                                        <real key="value" value="70"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="6"/>
+                                        <real key="value" value="3"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                        <real key="value" value="65"/>
+                                        <real key="value" value="58"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="tempChanged:" destination="Y6W-OH-hqX" eventType="editingDidEnd" id="005-TU-5dm"/>
+                                </connections>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1jd-f3-nqG">
+                                <rect key="frame" x="0.0" y="509.00000000000006" width="393" height="38.666666666666686"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tde-bj-Ezn" userLabel="Heater State">
+                                        <rect key="frame" x="0.0" y="0.0" width="131" height="38.666666666666664"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OVEN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aBW-Ez-azz">
+                                                <rect key="frame" x="0.0" y="0.0" width="131" height="19.333333333333332"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="???" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDn-hg-eUp">
+                                                <rect key="frame" x="0.0" y="19.333333333333371" width="131" height="19.333333333333329"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hF0-64-UQ4" userLabel="Current Temp">
+                                        <rect key="frame" x="131" y="0.0" width="131" height="38.666666666666664"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CURRENT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zyt-xb-Hf3">
+                                                <rect key="frame" x="0.0" y="0.0" width="131" height="19.333333333333332"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="???" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYn-U0-jsR">
+                                                <rect key="frame" x="0.0" y="19.333333333333371" width="131" height="19.333333333333329"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="y9Y-Pc-rO2" userLabel="Heater State">
+                                        <rect key="frame" x="262" y="0.0" width="131" height="38.666666666666664"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SET POINT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c0J-hW-Cov">
+                                                <rect key="frame" x="0.0" y="0.0" width="131" height="19.333333333333332"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="???" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fM3-Gg-f3f">
+                                                <rect key="frame" x="0.0" y="19.333333333333371" width="131" height="19.333333333333329"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WU8-uy-KEm">
+                                <rect key="frame" x="165" y="567.66666666666663" width="63" height="30"/>
+                                <menu key="menu" id="EvG-4L-9po">
+                                    <children>
+                                        <command title="Standard" menuElementState="on" id="GGZ-dS-xat" userLabel="Standard"/>
+                                        <command title="Boost" id="tRq-fH-T9x" userLabel="Boost"/>
+                                        <command title="Efficiency" id="Qhv-MG-TWB" userLabel="E"/>
+                                        <command title="Flavor" id="Yte-PD-hVj" userLabel="Boost"/>
+                                        <command title="Stealth" id="oMs-p4-ijn" userLabel="Boost"/>
+                                    </children>
+                                </menu>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="6my-gy-lBQ">
+                                <rect key="frame" x="16" y="616" width="361" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Standard"/>
+                                    <segment title="Boost"/>
+                                    <segment title="Efficiency"/>
+                                    <segment title="Flavor"/>
+                                    <segment title="Stealth"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Fvq-ZQ-yNy" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="4tB-cY-chw"/>
-                            <constraint firstItem="Fvq-ZQ-yNy" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="daK-qg-FpV"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Fvq-ZQ-yNy" secondAttribute="trailing" constant="20" id="osi-2e-CkW"/>
+                            <constraint firstItem="1jd-f3-nqG" firstAttribute="top" secondItem="Fvq-ZQ-yNy" secondAttribute="bottom" constant="8" symbolic="YES" id="1xU-wO-cUh"/>
+                            <constraint firstItem="Fvq-ZQ-yNy" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="25" id="4tB-cY-chw"/>
+                            <constraint firstItem="WU8-uy-KEm" firstAttribute="top" secondItem="1jd-f3-nqG" secondAttribute="bottom" constant="20" id="LP3-mG-Eqo"/>
+                            <constraint firstItem="WU8-uy-KEm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="RBb-SZ-J48"/>
+                            <constraint firstItem="WU8-uy-KEm" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="TjD-eK-cfA"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1jd-f3-nqG" secondAttribute="trailing" id="YK6-4T-2Cs"/>
+                            <constraint firstItem="Fvq-ZQ-yNy" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="daK-qg-FpV"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="WU8-uy-KEm" secondAttribute="trailing" constant="20" id="f8b-fy-ZoW"/>
+                            <constraint firstItem="1jd-f3-nqG" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="isf-K9-d6B"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Fvq-ZQ-yNy" secondAttribute="trailing" constant="10" id="osi-2e-CkW"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Device Name" id="xfU-RJ-pD1">
@@ -61,15 +152,21 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="labelOvenState" destination="RDn-hg-eUp" id="MiX-Pd-VVh"/>
+                        <outlet property="labelSetTemp" destination="fM3-Gg-f3f" id="tPk-kD-7di"/>
+                        <outlet property="labelTemp" destination="MYn-U0-jsR" id="WhT-k5-DmR"/>
                         <outlet property="tempControl" destination="Fvq-ZQ-yNy" id="pxn-YK-IeK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.64122137404578" y="-17.605633802816904"/>
+            <point key="canvasLocation" x="135.1145038167939" y="-17.605633802816904"/>
         </scene>
     </scenes>
     <resources>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -347,10 +347,14 @@ class DeviceTableViewController: UITableViewController, NSFetchedResultsControll
         
         switch device.type {
         case .Pax3:
+            guard let pax3 = device as? Pax3Device else {
+                fatalError("type is pax 3, but class is wrong?")
+            }
+            
             let vc = sb.instantiateViewController(withIdentifier: "InitialPax3") as! Pax3MainViewController
             vc.btCentral = central
             vc.dbDevice = dbDevice
-            vc.device = device
+            vc.device = pax3
             
             self.navigationController?.pushViewController(vc, animated:true)
             

@@ -7,7 +7,7 @@
 
 import UIKit
 import OSLog
-
+ 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     private static let L = Logger(subsystem: "me.blraaz.kushkontroller", category: "AppDelegate")

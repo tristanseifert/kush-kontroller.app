@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 import CoreBluetooth
 import OSLog
 
@@ -19,16 +20,28 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
     /// Bluetooth central (acquired from initialization time)
     public var btCentral: CBCentralManager! = nil
     /// Pax device we're controlling
-    public var device: PaxDevice! = nil {
+    public var device: Pax3Device! = nil {
         didSet {
+            guard self.view != nil else {
+                return
+            }
             self.updateDeviceListeners()
         }
     }
+    /// Device property listeners
+    private var deviceListeners: [AnyCancellable] = []
     /// Persistent device storage
     public var dbDevice: PersistentDevice! = nil
     
     /// Circular slider for temperature
     @IBOutlet var tempControl: PaxTempControl!
+    
+    /// Label for current temperature
+    @IBOutlet var labelTemp: UILabel!
+    /// Label for set point temperature
+    @IBOutlet var labelSetTemp: UILabel!
+    /// Label for oven state
+    @IBOutlet var labelOvenState: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +49,17 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
         // Do any additional setup after loading the view.
         self.btCentral.delegate = self
         
+        self.labelTemp.font = UIFont.monospacedDigitSystemFont(ofSize: self.labelTemp.font.pointSize,
+                                                               weight: .regular)
+        self.labelSetTemp.font = UIFont.monospacedDigitSystemFont(ofSize: self.labelSetTemp.font.pointSize,
+                                                                  weight: .regular)
+        
         self.loadDisplayConfig()
+        
+        // add device listeners if we've a device
+        if self.device != nil {
+            self.updateDeviceListeners()
+        }
     }
     
     /**
@@ -69,6 +92,21 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
         Self.L.info("willDisappear")
     }
     
+    // MARK: - UI Actions
+    /**
+     * @brief Handle value change from temperature slider
+     */
+    @IBAction private func tempChanged(_ sender: Any?) {
+        Self.L.trace("Set new temp: \(self.tempControl.value)")
+        
+        do {
+            try self.device.setOvenTemp(Float(self.tempControl.value))
+        } catch {
+            Self.L.error("Failed to set oven temp: \(error)")
+            // TODO: display error to user
+        }
+    }
+    
     // MARK: - Device control
     /**
      * @brief Update the device state listener
@@ -76,9 +114,81 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
      * This will update the current temperature and so forth.
      */
     private func updateDeviceListeners() {
+        self.deviceListeners.removeAll(keepingCapacity: true)
         
+        self.deviceListeners.append(self.device.$ovenTemp.sink { newTemp in
+            DispatchQueue.main.async {
+                self.labelTemp.text = self.formatTemp(newTemp)
+            }
+        })
+        self.deviceListeners.append(self.device.$ovenTargetTemp.sink { newTemp in
+            DispatchQueue.main.async {
+                self.labelSetTemp.text = self.formatTemp(newTemp)
+            }
+        })
+        self.deviceListeners.append(self.device.$ovenSetTemp.sink { newTemp in
+            DispatchQueue.main.async {
+                Self.L.trace("Set temp: \(newTemp)")
+                self.tempControl.value = Double(newTemp)
+            }
+        })
+        
+        
+        self.deviceListeners.append(self.device.$heatingState.sink { newState in
+            DispatchQueue.main.async {
+                switch newState {
+                case .cooling:
+                    self.labelOvenState.text = Self.Localized("dynamicMode.cooling")
+                
+                case .boosting:
+                    self.labelOvenState.text = Self.Localized("dynamicMode.boosting")
+                    
+                case .heating:
+                    self.labelOvenState.text = Self.Localized("dynamicMode.heating")
+                    
+                case .ovenOff:
+                    self.labelOvenState.text = Self.Localized("dynamicMode.ovenOff")
+                    
+                case .ready:
+                    self.labelOvenState.text = Self.Localized("dynamicMode.ready")
+                    
+                case .standby:
+                    self.labelOvenState.text = Self.Localized("dynamicMode.standby")
+                    
+                default:
+                    self.labelOvenState.text = "Unknown (\(newState.rawValue))"
+                }
+            }
+        })
+        
+        // TODO: update UI for this
+        self.deviceListeners.append(self.device.$ovenDynamicMode.sink { dynamicMode in
+            Self.L.trace("Dynamic state: \(dynamicMode.rawValue)")
+        })
+        
+        // TODO: show battery percentage
+        self.deviceListeners.append(self.device.$batteryLevel.sink { batteryLevel in
+            Self.L.trace("Battery: \(batteryLevel)")
+        })
     }
     
+    /**
+     * @brief Format a temperature value
+     *
+     * @param temp Input temperature, in celsius
+     */
+    private func formatTemp(_ temp: Float) -> String {
+        let value = Measurement(value: Double(temp), unit: UnitTemperature.celsius)
+        // TODO: do conversion here
+        
+        // format to string
+        let formatter = MeasurementFormatter()
+        formatter.unitOptions = .providedUnit
+        formatter.unitStyle = .medium
+        formatter.numberFormatter.maximumFractionDigits = 0
+        
+        return formatter.string(from: value)
+    }
 
     // MARK: - Central manager
     /**
@@ -95,5 +205,10 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
         Self.L.warning("Device \(peripheral) disconnected: \(error)")
         
         // TODO: try to reconnect
+    }
+    
+    // MARK: - Helpers
+    static private func Localized(_ key: String) -> String {
+        return NSLocalizedString(key, tableName: "Pax3MainViewController", comment: "")
     }
 }

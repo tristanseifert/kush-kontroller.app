@@ -53,6 +53,7 @@
 		6ABC30FD28FA727900525475 /* PersistentDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABC30FC28FA727900525475 /* PersistentDevice.swift */; };
 		6ABC30FF28FA787B00525475 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABC30FE28FA787B00525475 /* Types.swift */; };
 		6ABC310228FA78FA00525475 /* PairingTypes.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6ABC310428FA78FA00525475 /* PairingTypes.strings */; };
+		6AE6AD5A28FCA5CD001FE38B /* Pax3MainViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6AE6AD5928FCA5CD001FE38B /* Pax3MainViewController.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,6 +98,7 @@
 		6ABC30FC28FA727900525475 /* PersistentDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentDevice.swift; sourceTree = "<group>"; };
 		6ABC30FE28FA787B00525475 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		6ABC310328FA78FA00525475 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/PairingTypes.strings; sourceTree = "<group>"; };
+		6AE6AD5928FCA5CD001FE38B /* Pax3MainViewController.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Pax3MainViewController.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +248,7 @@
 			children = (
 				6AB079DB28FB74CE0025CD3E /* PaxControl.storyboard */,
 				6AB079DD28FB75470025CD3E /* Pax3MainViewController.swift */,
+				6AE6AD5928FCA5CD001FE38B /* Pax3MainViewController.strings */,
 				6AB079E028FB7B470025CD3E /* PaxTempControl.swift */,
 			);
 			path = Pax;
@@ -407,6 +410,7 @@
 				6AB079DC28FB74CE0025CD3E /* PaxControl.storyboard in Resources */,
 				6ABC310228FA78FA00525475 /* PairingTypes.strings in Resources */,
 				6AB079C828FA86820025CD3E /* DeviceInfoViewController.strings in Resources */,
+				6AE6AD5A28FCA5CD001FE38B /* Pax3MainViewController.strings in Resources */,
 				6A0173A728FA0A690008A6E8 /* Main.storyboard in Resources */,
 				6ABC30F628FA6DB800525475 /* PaxPairingCompletionViewController.strings in Resources */,
 				6A0173BF28FA15B40008A6E8 /* Devices.storyboard in Resources */,

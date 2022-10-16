@@ -1,0 +1,13 @@
+/* 
+  Pax3MainViewController.strings
+  Kush Kontroller
+
+  Created by Tristan Seifert on 20221016.
+  
+*/
+
+"dynamicMode.cooling" = "Cooling";
+"dynamicMode.boosting" = "Heating";
+"dynamicMode.ovenOff" = "Powered Off";
+"dynamicMode.ready" = "Ready";
+"dynamicMode.standby" = "Standby";
