@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <device id="retina6_12" orientation="portrait" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -42,7 +42,7 @@
                                         <real key="value" value="3"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                        <real key="value" value="58"/>
+                                        <real key="value" value="56"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -149,13 +149,21 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Mode: ???"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🎦" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DMM-VO-z9C">
+                                <rect key="frame" x="178.66666666666666" y="793.66666666666663" width="36" height="38.333333333333371"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="DMM-VO-z9C" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="0zP-DP-L8c"/>
                             <constraint firstItem="1jd-f3-nqG" firstAttribute="top" secondItem="Fvq-ZQ-yNy" secondAttribute="bottom" id="1xU-wO-cUh"/>
                             <constraint firstItem="Fvq-ZQ-yNy" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="4tB-cY-chw"/>
                             <constraint firstItem="kf5-5o-0Ki" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="5tP-oK-ECD"/>
+                            <constraint firstAttribute="bottom" secondItem="DMM-VO-z9C" secondAttribute="bottom" constant="20" id="A13-XA-Pob"/>
                             <constraint firstItem="eX2-Sc-8wN" firstAttribute="top" secondItem="1jd-f3-nqG" secondAttribute="bottom" constant="20" id="Nnq-HK-cq3"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1jd-f3-nqG" secondAttribute="trailing" id="YK6-4T-2Cs"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="eX2-Sc-8wN" secondAttribute="trailing" id="Ydb-0h-j3y"/>

@@ -50,6 +50,9 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
     /// Button for updating dynamic mode
     @IBOutlet var modeBtn: UIButton!
     
+    /// Weed flame
+    private var smoker: KushSmokerLayer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -105,6 +108,12 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
         if self.device != nil {
             self.updateDeviceListeners()
         }
+        
+        // create kush smoking layer
+        self.smoker = KushSmokerLayer()
+        self.smoker.gas = 0
+        self.smoker.frame = self.view.bounds
+        self.view.layer.insertSublayer(self.smoker, at: UInt32(self.view.layer.sublayers!.count - 1))
     }
     
     /**
@@ -120,9 +129,16 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
      * Do some first time initialization (once the device and central have been set)
      */
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         self.navigationItem.title = self.dbDevice.displayName
         
-        super.viewWillAppear(animated)
+        // force dark mode
+        self.navigationController?.parent?.overrideUserInterfaceStyle = .dark
+        
+        // set up smoker
+        self.smoker.frame = self.view.bounds
+        self.smoker.gas = 0
     }
     
     /**
@@ -131,10 +147,12 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
+        // stop and disconnect device
         self.device.stop()
         self.btCentral.cancelPeripheralConnection(self.device.peripheral)
         
-        Self.L.info("willDisappear")
+        // restore default appearance
+        self.navigationController?.parent?.overrideUserInterfaceStyle = .unspecified
     }
     
     // MARK: - UI Actions
@@ -167,6 +185,18 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
         self.modeBtn.configuration?.showsActivityIndicator = true
     }
     
+    /**
+     * @brief Update the kush flame
+     */
+    private func updateFlame() {
+        if self.device.heatingState != .ovenOff {
+            let tempFraction = min(1, max(0.1, self.device.ovenTemp - 145) / 60)
+            self.smoker.gas = Double(tempFraction)
+        } else {
+            self.smoker.gas = 0
+        }
+    }
+    
     // MARK: - Device control
     /**
      * @brief Update the device state listener
@@ -179,6 +209,8 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
         self.deviceListeners.append(self.device.$ovenTemp.sink { newTemp in
             DispatchQueue.main.async {
                 self.labelTemp.text = self.formatTemp(newTemp)
+                
+                self.updateFlame()
             }
         })
         self.deviceListeners.append(self.device.$ovenTargetTemp.sink { newTemp in
@@ -216,10 +248,11 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
                 default:
                     self.labelOvenState.text = "Unknown (\(newState.rawValue))"
                 }
+                
+                self.updateFlame()
             }
         })
         
-        // TODO: update UI for this
         self.deviceListeners.append(self.device.$ovenDynamicMode.sink { dynamicMode in
             DispatchQueue.main.async {
                 switch dynamicMode {
@@ -254,15 +287,17 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
             }
         })
         self.deviceListeners.append(self.device.$chargeState.sink { chargeState in
-            switch chargeState {
-            case .charging:
-                self.labelChargeState.text = Self.Localized("chargeState.charging")
-            case .notCharging:
-                self.labelChargeState.text = Self.Localized("chargeState.notCharging")
-            case .chargingCompleted:
-                self.labelChargeState.text = Self.Localized("chargeState.chargingCompleted")
-            default:
-                self.labelChargeState.text = Self.Localized("chargeState.unknown")
+            DispatchQueue.main.async {
+                switch chargeState {
+                case .charging:
+                    self.labelChargeState.text = Self.Localized("chargeState.charging")
+                case .notCharging:
+                    self.labelChargeState.text = Self.Localized("chargeState.notCharging")
+                case .chargingCompleted:
+                    self.labelChargeState.text = Self.Localized("chargeState.chargingCompleted")
+                default:
+                    self.labelChargeState.text = Self.Localized("chargeState.unknown")
+                }
             }
         })
     }

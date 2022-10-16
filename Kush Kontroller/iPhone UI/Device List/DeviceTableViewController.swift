@@ -163,6 +163,10 @@ class DeviceTableViewController: UITableViewController, NSFetchedResultsControll
                         hud.dismiss(animated: true)
                         
                         tableView.deselectRow(at: indexPath, animated: true)
+                        
+                        // mark it as connected
+                        dbDevice.lastConnected = Date.now
+                        try! dbDevice.managedObjectContext?.save()
                     }
                     break
                     

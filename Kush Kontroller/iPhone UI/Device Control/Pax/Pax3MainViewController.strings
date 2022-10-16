@@ -6,8 +6,9 @@
   
 */
 
+"ovenMode.heating" = "Heating";
 "ovenMode.cooling" = "Cooling";
-"ovenMode.boosting" = "Heating";
+"ovenMode.boosting" = "Boost";
 "ovenMode.ovenOff" = "Powered Off";
 "ovenMode.ready" = "Ready";
 "ovenMode.standby" = "Standby";
