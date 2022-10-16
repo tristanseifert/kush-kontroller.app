@@ -208,7 +208,7 @@ public class PaxTempControl: UIControl {
      */
     private func setValueFromPosition(_ position: CGPoint) {
         let center = CGPoint(x: bounds.width / 2, y: bounds.height / 2)
-         
+        
         let knobInset = max(0, (self.knobWidth - self.trackWidth))
         let strokeInset = max(0, self.borderWidth)
         let radius = ((max(bounds.width, bounds.height)) / 2) - self.trackWidth/2 - knobInset/2 - strokeInset/2
@@ -274,8 +274,8 @@ public class PaxTempControl: UIControl {
      * This creates the various required layers.
      */
     private func initLayers() {
-        // prepare root view layer with layout manager
-        self.layer.masksToBounds = true
+        // prepare root view layer
+        self.layer.masksToBounds = false
         
         // gradient layer for track
         self.trackGradient = CAGradientLayer()
@@ -287,7 +287,7 @@ public class PaxTempControl: UIControl {
             UIColor.blue.cgColor, UIColor.green.cgColor,
             UIColor.yellow.cgColor, UIColor.red.cgColor
         ]
-        self.trackGradient.locations = [0, 0.4, 0.5, 0.75, 1]
+        self.trackGradient.locations = [0, 0.45, 0.55, 0.75, 1]
         
         self.layer.addSublayer(self.trackGradient)
         

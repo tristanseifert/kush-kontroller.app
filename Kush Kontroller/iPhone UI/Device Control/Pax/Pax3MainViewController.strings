@@ -6,8 +6,25 @@
   
 */
 
-"dynamicMode.cooling" = "Cooling";
-"dynamicMode.boosting" = "Heating";
-"dynamicMode.ovenOff" = "Powered Off";
-"dynamicMode.ready" = "Ready";
-"dynamicMode.standby" = "Standby";
+"ovenMode.cooling" = "Cooling";
+"ovenMode.boosting" = "Heating";
+"ovenMode.ovenOff" = "Powered Off";
+"ovenMode.ready" = "Ready";
+"ovenMode.standby" = "Standby";
+
+"chargeState.unknown" = "Unknown";
+"chargeState.notCharging" = "Not Charging";
+"chargeState.charging" = "Charging";
+"chargeState.chargingCompleted" = "Fully Charged";
+
+"dynamicMode.menu.title" = "Select a new Dynamic Mode:";
+"dynamicMode.menu.item.standard" = "Standard";
+"dynamicMode.menu.item.boost" = "Boost";
+"dynamicMode.menu.item.efficiency" = "Efficiency";
+"dynamicMode.menu.item.flavor" = "Flavor";
+"dynamicMode.menu.item.stealth" = "Stealth";
+"dynamicMode.button.title.standard" = "Mode: Standard";
+"dynamicMode.button.title.boost" = "Mode: Boost";
+"dynamicMode.button.title.efficiency" = "Mode: Efficiency";
+"dynamicMode.button.title.flavor" = "Mode: Flavor";
+"dynamicMode.button.title.stealth" = "Mode: Stealth";

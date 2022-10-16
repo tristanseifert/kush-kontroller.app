@@ -5,20 +5,19 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="UIMenu" message="Requires Xcode 11 or later." minToolsVersion="11.0" requiredIntegratedClassName="UICommandDiff"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Device Name-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="InitialPax3" id="Y6W-OH-hqX" customClass="Pax3MainViewController" customModule="Kush_Kontroller" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InitialPax3" hidesBottomBarWhenPushed="YES" id="Y6W-OH-hqX" customClass="Pax3MainViewController" customModule="Kush_Kontroller" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fvq-ZQ-yNy" customClass="PaxTempControl" customModule="Kush_Kontroller" customModuleProvider="target">
-                                <rect key="frame" x="10" y="128" width="373" height="373"/>
+                                <rect key="frame" x="10" y="113" width="373" height="373"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Fvq-ZQ-yNy" secondAttribute="height" multiplier="1:1" id="0D1-ae-yMD"/>
@@ -51,7 +50,7 @@
                                 </connections>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1jd-f3-nqG">
-                                <rect key="frame" x="0.0" y="509.00000000000006" width="393" height="38.666666666666686"/>
+                                <rect key="frame" x="0.0" y="486" width="393" height="38.666666666666629"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tde-bj-Ezn" userLabel="Heater State">
                                         <rect key="frame" x="0.0" y="0.0" width="131" height="38.666666666666664"/>
@@ -63,7 +62,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="???" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDn-hg-eUp">
-                                                <rect key="frame" x="0.0" y="19.333333333333371" width="131" height="19.333333333333329"/>
+                                                <rect key="frame" x="0.0" y="19.333333333333314" width="131" height="19.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -80,7 +79,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="???" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYn-U0-jsR">
-                                                <rect key="frame" x="0.0" y="19.333333333333371" width="131" height="19.333333333333329"/>
+                                                <rect key="frame" x="0.0" y="19.333333333333314" width="131" height="19.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -97,7 +96,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="???" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fM3-Gg-f3f">
-                                                <rect key="frame" x="0.0" y="19.333333333333371" width="131" height="19.333333333333329"/>
+                                                <rect key="frame" x="0.0" y="19.333333333333314" width="131" height="19.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -106,55 +105,79 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WU8-uy-KEm">
-                                <rect key="frame" x="165" y="567.66666666666663" width="63" height="30"/>
-                                <menu key="menu" id="EvG-4L-9po">
-                                    <children>
-                                        <command title="Standard" menuElementState="on" id="GGZ-dS-xat" userLabel="Standard"/>
-                                        <command title="Boost" id="tRq-fH-T9x" userLabel="Boost"/>
-                                        <command title="Efficiency" id="Qhv-MG-TWB" userLabel="E"/>
-                                        <command title="Flavor" id="Yte-PD-hVj" userLabel="Boost"/>
-                                        <command title="Stealth" id="oMs-p4-ijn" userLabel="Boost"/>
-                                    </children>
-                                </menu>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="eX2-Sc-8wN">
+                                <rect key="frame" x="0.0" y="544.66666666666663" width="393" height="38.666666666666629"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="m3C-dc-mDH" userLabel="Current Temp">
+                                        <rect key="frame" x="0.0" y="0.0" width="196.66666666666666" height="38.666666666666664"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHARGE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R8W-4K-XPx">
+                                                <rect key="frame" x="0.0" y="0.0" width="196.66666666666666" height="19.333333333333332"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="???" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5AY-w3-pEP">
+                                                <rect key="frame" x="0.0" y="19.333333333333371" width="196.66666666666666" height="19.333333333333329"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="e1B-gi-iBF" userLabel="Heater State">
+                                        <rect key="frame" x="196.66666666666663" y="0.0" width="196.33333333333337" height="38.666666666666664"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BATTERY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v61-kU-WKP">
+                                                <rect key="frame" x="0.0" y="0.0" width="196.33333333333334" height="19.333333333333332"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="???" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AjO-HC-xMh">
+                                                <rect key="frame" x="0.0" y="19.333333333333371" width="196.33333333333334" height="19.333333333333329"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kf5-5o-0Ki">
+                                <rect key="frame" x="146" y="603.33333333333337" width="101.33333333333331" height="34.333333333333371"/>
                                 <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Mode: ???"/>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="6my-gy-lBQ">
-                                <rect key="frame" x="16" y="616" width="361" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="Standard"/>
-                                    <segment title="Boost"/>
-                                    <segment title="Efficiency"/>
-                                    <segment title="Flavor"/>
-                                    <segment title="Stealth"/>
-                                </segments>
-                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="1jd-f3-nqG" firstAttribute="top" secondItem="Fvq-ZQ-yNy" secondAttribute="bottom" constant="8" symbolic="YES" id="1xU-wO-cUh"/>
-                            <constraint firstItem="Fvq-ZQ-yNy" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="25" id="4tB-cY-chw"/>
-                            <constraint firstItem="WU8-uy-KEm" firstAttribute="top" secondItem="1jd-f3-nqG" secondAttribute="bottom" constant="20" id="LP3-mG-Eqo"/>
-                            <constraint firstItem="WU8-uy-KEm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="RBb-SZ-J48"/>
-                            <constraint firstItem="WU8-uy-KEm" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="TjD-eK-cfA"/>
+                            <constraint firstItem="1jd-f3-nqG" firstAttribute="top" secondItem="Fvq-ZQ-yNy" secondAttribute="bottom" id="1xU-wO-cUh"/>
+                            <constraint firstItem="Fvq-ZQ-yNy" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="4tB-cY-chw"/>
+                            <constraint firstItem="kf5-5o-0Ki" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="5tP-oK-ECD"/>
+                            <constraint firstItem="eX2-Sc-8wN" firstAttribute="top" secondItem="1jd-f3-nqG" secondAttribute="bottom" constant="20" id="Nnq-HK-cq3"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="1jd-f3-nqG" secondAttribute="trailing" id="YK6-4T-2Cs"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="eX2-Sc-8wN" secondAttribute="trailing" id="Ydb-0h-j3y"/>
                             <constraint firstItem="Fvq-ZQ-yNy" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="daK-qg-FpV"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="WU8-uy-KEm" secondAttribute="trailing" constant="20" id="f8b-fy-ZoW"/>
                             <constraint firstItem="1jd-f3-nqG" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="isf-K9-d6B"/>
+                            <constraint firstItem="eX2-Sc-8wN" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="oa2-lq-l07"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Fvq-ZQ-yNy" secondAttribute="trailing" constant="10" id="osi-2e-CkW"/>
+                            <constraint firstItem="kf5-5o-0Ki" firstAttribute="top" secondItem="eX2-Sc-8wN" secondAttribute="bottom" constant="20" id="yJz-6f-wwS"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Device Name" id="xfU-RJ-pD1">
                         <barButtonItem key="backBarButtonItem" title="Disconnect" id="8Qy-vf-dGg"/>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="labelBatteryPercent" destination="AjO-HC-xMh" id="n8R-Ae-xZh"/>
+                        <outlet property="labelChargeState" destination="5AY-w3-pEP" id="A3c-AZ-Wpu"/>
                         <outlet property="labelOvenState" destination="RDn-hg-eUp" id="MiX-Pd-VVh"/>
                         <outlet property="labelSetTemp" destination="fM3-Gg-f3f" id="tPk-kD-7di"/>
                         <outlet property="labelTemp" destination="MYn-U0-jsR" id="WhT-k5-DmR"/>
+                        <outlet property="modeBtn" destination="kf5-5o-0Ki" id="rd5-Pn-Efg"/>
                         <outlet property="tempControl" destination="Fvq-ZQ-yNy" id="pxn-YK-IeK"/>
                     </connections>
                 </viewController>

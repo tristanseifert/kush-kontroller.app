@@ -42,6 +42,13 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
     @IBOutlet var labelSetTemp: UILabel!
     /// Label for oven state
     @IBOutlet var labelOvenState: UILabel!
+    /// Label for battery percentage
+    @IBOutlet var labelBatteryPercent: UILabel!
+    /// Label for charging state
+    @IBOutlet var labelChargeState: UILabel!
+    
+    /// Button for updating dynamic mode
+    @IBOutlet var modeBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +62,44 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
                                                                   weight: .regular)
         
         self.loadDisplayConfig()
+        
+        // menu
+        let menuAction  = {(action: UIAction) in
+            Self.L.debug("Dynamic mode menu selected: \(action)")
+            
+            var mode: DynamicModeMessage.Mode
+            switch action.identifier.rawValue {
+            case "standard":
+                mode = .standard
+            case "boost":
+                mode = .boost
+            case "efficiency":
+                mode = .efficiency
+            case "flavor":
+                mode = .flavor
+            case "stealth":
+                mode = .stealth
+                
+            default:
+                fatalError("unknown mode: \(action.identifier.rawValue)")
+            }
+            
+            self.changeDynamicMode(mode)
+        }
+        
+        self.modeBtn.menu = UIMenu(title: Self.Localized("dynamicMode.menu.title"), children: [
+            UIAction(title: Self.Localized("dynamicMode.menu.item.standard"),
+                     identifier: .init("standard"), handler: menuAction),
+            UIAction(title: Self.Localized("dynamicMode.menu.item.boost"),
+                     identifier: .init("boost"), handler: menuAction),
+            UIAction(title: Self.Localized("dynamicMode.menu.item.efficiency"),
+                     identifier: .init("efficiency"), handler: menuAction),
+            UIAction(title: Self.Localized("dynamicMode.menu.item.flavor"),
+                     identifier: .init("flavor"), handler: menuAction),
+            UIAction(title: Self.Localized("dynamicMode.menu.item.stealth"),
+                     identifier: .init("stealth"), handler: menuAction),
+        ])
+        self.modeBtn.showsMenuAsPrimaryAction = true
         
         // add device listeners if we've a device
         if self.device != nil {
@@ -107,6 +152,21 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
         }
     }
     
+    /**
+     * @brief Update dynamic mode
+     */
+    private func changeDynamicMode(_ mode: DynamicModeMessage.Mode) {
+        do {
+            try self.device.setOvenDynamicMode(mode)
+        } catch {
+            Self.L.error("Failed to set dynamic mode: \(error)")
+            // TODO: display error to user
+        }
+        
+        // show a progress indicator until it updates
+        self.modeBtn.configuration?.showsActivityIndicator = true
+    }
+    
     // MARK: - Device control
     /**
      * @brief Update the device state listener
@@ -128,32 +188,30 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
         })
         self.deviceListeners.append(self.device.$ovenSetTemp.sink { newTemp in
             DispatchQueue.main.async {
-                Self.L.trace("Set temp: \(newTemp)")
                 self.tempControl.value = Double(newTemp)
             }
         })
-        
         
         self.deviceListeners.append(self.device.$heatingState.sink { newState in
             DispatchQueue.main.async {
                 switch newState {
                 case .cooling:
-                    self.labelOvenState.text = Self.Localized("dynamicMode.cooling")
+                    self.labelOvenState.text = Self.Localized("ovenMode.cooling")
                 
                 case .boosting:
-                    self.labelOvenState.text = Self.Localized("dynamicMode.boosting")
+                    self.labelOvenState.text = Self.Localized("ovenMode.boosting")
                     
                 case .heating:
-                    self.labelOvenState.text = Self.Localized("dynamicMode.heating")
+                    self.labelOvenState.text = Self.Localized("ovenMode.heating")
                     
                 case .ovenOff:
-                    self.labelOvenState.text = Self.Localized("dynamicMode.ovenOff")
+                    self.labelOvenState.text = Self.Localized("ovenMode.ovenOff")
                     
                 case .ready:
-                    self.labelOvenState.text = Self.Localized("dynamicMode.ready")
+                    self.labelOvenState.text = Self.Localized("ovenMode.ready")
                     
                 case .standby:
-                    self.labelOvenState.text = Self.Localized("dynamicMode.standby")
+                    self.labelOvenState.text = Self.Localized("ovenMode.standby")
                     
                 default:
                     self.labelOvenState.text = "Unknown (\(newState.rawValue))"
@@ -163,12 +221,49 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
         
         // TODO: update UI for this
         self.deviceListeners.append(self.device.$ovenDynamicMode.sink { dynamicMode in
-            Self.L.trace("Dynamic state: \(dynamicMode.rawValue)")
+            DispatchQueue.main.async {
+                switch dynamicMode {
+                case .standard:
+                    self.modeBtn.setTitle(Self.Localized("dynamicMode.button.title.standard"),
+                                          for: .normal)
+                case .boost:
+                    self.modeBtn.setTitle(Self.Localized("dynamicMode.button.title.boost"),
+                                          for: .normal)
+                case .efficiency:
+                    self.modeBtn.setTitle(Self.Localized("dynamicMode.button.title.efficiency"),
+                                          for: .normal)
+                case .stealth:
+                    self.modeBtn.setTitle(Self.Localized("dynamicMode.button.title.stealth"),
+                                          for: .normal)
+                case .flavor:
+                    self.modeBtn.setTitle(Self.Localized("dynamicMode.button.title.flavor"),
+                                          for: .normal)
+                }
+                self.modeBtn.configuration?.showsActivityIndicator = false
+            }
         })
         
-        // TODO: show battery percentage
         self.deviceListeners.append(self.device.$batteryLevel.sink { batteryLevel in
-            Self.L.trace("Battery: \(batteryLevel)")
+            // TODO: show a battery icon also?
+            DispatchQueue.main.async {
+                let form = NumberFormatter()
+                form.numberStyle = .percent
+                
+                let temp = Double(batteryLevel) / 100.0
+                self.labelBatteryPercent.text = form.string(from: temp as NSNumber)
+            }
+        })
+        self.deviceListeners.append(self.device.$chargeState.sink { chargeState in
+            switch chargeState {
+            case .charging:
+                self.labelChargeState.text = Self.Localized("chargeState.charging")
+            case .notCharging:
+                self.labelChargeState.text = Self.Localized("chargeState.notCharging")
+            case .chargingCompleted:
+                self.labelChargeState.text = Self.Localized("chargeState.chargingCompleted")
+            default:
+                self.labelChargeState.text = Self.Localized("chargeState.unknown")
+            }
         })
     }
     
