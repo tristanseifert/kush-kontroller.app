@@ -22,7 +22,10 @@
 		6A0173D028FA1C870008A6E8 /* Pairing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A0173CF28FA1C870008A6E8 /* Pairing.storyboard */; };
 		6A0173D228FA1DAB0008A6E8 /* PairingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0173D128FA1DAB0008A6E8 /* PairingViewController.swift */; };
 		6A01EFC328FCC100008841C5 /* KushSmokerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A01EFC228FCC100008841C5 /* KushSmokerLayer.swift */; };
+		6A01EFC528FCF401008841C5 /* dnb.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6A01EFC428FCF401008841C5 /* dnb.mp3 */; };
 		6A01EFC728FCF642008841C5 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A01EFC628FCF642008841C5 /* Defaults.plist */; };
+		6A01EFC928FCF758008841C5 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A01EFC828FCF758008841C5 /* SettingsViewController.swift */; };
+		6A01EFCB28FCF858008841C5 /* SettingsViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A01EFCA28FCF858008841C5 /* SettingsViewController.strings */; };
 		6AB079C328FA840B0025CD3E /* Eureka in Frameworks */ = {isa = PBXBuildFile; productRef = 6AB079C228FA840B0025CD3E /* Eureka */; };
 		6AB079C528FA841E0025CD3E /* DeviceInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB079C428FA841E0025CD3E /* DeviceInfoViewController.swift */; };
 		6AB079C828FA86820025CD3E /* DeviceInfoViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6AB079CA28FA86820025CD3E /* DeviceInfoViewController.strings */; };
@@ -72,7 +75,10 @@
 		6A0173CF28FA1C870008A6E8 /* Pairing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Pairing.storyboard; sourceTree = "<group>"; };
 		6A0173D128FA1DAB0008A6E8 /* PairingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairingViewController.swift; sourceTree = "<group>"; };
 		6A01EFC228FCC100008841C5 /* KushSmokerLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KushSmokerLayer.swift; sourceTree = "<group>"; };
+		6A01EFC428FCF401008841C5 /* dnb.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = dnb.mp3; sourceTree = "<group>"; };
 		6A01EFC628FCF642008841C5 /* Defaults.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
+		6A01EFC828FCF758008841C5 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		6A01EFCA28FCF858008841C5 /* SettingsViewController.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = SettingsViewController.strings; sourceTree = "<group>"; };
 		6AB079C428FA841E0025CD3E /* DeviceInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoViewController.swift; sourceTree = "<group>"; };
 		6AB079C928FA86820025CD3E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DeviceInfoViewController.strings; sourceTree = "<group>"; };
 		6AB079CC28FB2FDD0025CD3E /* PaxConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaxConnector.swift; sourceTree = "<group>"; };
@@ -163,6 +169,7 @@
 		6A0173B728FA10410008A6E8 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				6A01EFC428FCF401008841C5 /* dnb.mp3 */,
 				6A0173A828FA0A6A0008A6E8 /* Assets.xcassets */,
 				6A0173AD28FA0A6A0008A6E8 /* Info.plist */,
 				6A0173AA28FA0A6A0008A6E8 /* LaunchScreen.storyboard */,
@@ -192,6 +199,8 @@
 			isa = PBXGroup;
 			children = (
 				6A0173BB28FA13140008A6E8 /* Settings.storyboard */,
+				6A01EFC828FCF758008841C5 /* SettingsViewController.swift */,
+				6A01EFCA28FCF858008841C5 /* SettingsViewController.strings */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -422,8 +431,10 @@
 				6AB079C828FA86820025CD3E /* DeviceInfoViewController.strings in Resources */,
 				6AE6AD5A28FCA5CD001FE38B /* Pax3MainViewController.strings in Resources */,
 				6A0173A728FA0A690008A6E8 /* Main.storyboard in Resources */,
+				6A01EFC528FCF401008841C5 /* dnb.mp3 in Resources */,
 				6ABC30F628FA6DB800525475 /* PaxPairingCompletionViewController.strings in Resources */,
 				6A0173BF28FA15B40008A6E8 /* Devices.storyboard in Resources */,
+				6A01EFCB28FCF858008841C5 /* SettingsViewController.strings in Resources */,
 				6AB079D628FB735C0025CD3E /* PaxConnector.strings in Resources */,
 				6A0173BC28FA13140008A6E8 /* Settings.storyboard in Resources */,
 				6A0173D028FA1C870008A6E8 /* Pairing.storyboard in Resources */,
@@ -449,6 +460,7 @@
 				6A0173A028FA0A690008A6E8 /* AppDelegate.swift in Sources */,
 				6AB079DE28FB75470025CD3E /* Pax3MainViewController.swift in Sources */,
 				6ABC30FD28FA727900525475 /* PersistentDevice.swift in Sources */,
+				6A01EFC928FCF758008841C5 /* SettingsViewController.swift in Sources */,
 				6ABC30C128FA2F2300525475 /* PaxPairingViewController.swift in Sources */,
 				6A01EFC328FCC100008841C5 /* KushSmokerLayer.swift in Sources */,
 				6A0173C128FA165F0008A6E8 /* DeviceTableViewController.swift in Sources */,

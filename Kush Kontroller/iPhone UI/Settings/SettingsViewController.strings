@@ -1,0 +1,12 @@
+/* 
+  SettingsViewController.strings
+  Kush Kontroller
+
+  Created by Tristan Seifert on 20221016.
+  
+*/
+
+"section.chill.title" = "Chill Enhancement";
+"section.chill.footer" = "Enable these options to make your experience more chill.";
+"chill.fire" = "Blaze It Mafia™ Flame";
+"chill.dnbMode" = "D&B Mode";

@@ -4,5 +4,7 @@
 <dict>
 	<key>dnbMode</key>
 	<false/>
+	<key>blazeItFlame</key>
+	<true/>
 </dict>
 </plist>

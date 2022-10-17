@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 import Combine
 import CoreBluetooth
 import OSLog
@@ -55,8 +56,10 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
     /// Button for updating dynamic mode
     @IBOutlet var modeBtn: UIButton!
     
+    /// Dank and blunt player
+    private var dnbPlayer: AVAudioPlayer?
     /// Weed flame
-    private var smoker: KushSmokerLayer!
+    private var smoker: KushSmokerLayer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,10 +118,26 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
         }
         
         // create kush smoking layer
-        self.smoker = KushSmokerLayer()
-        self.smoker.gas = 0
-        self.smoker.frame = self.view.bounds
-        self.view.layer.insertSublayer(self.smoker, at: UInt32(self.view.layer.sublayers!.count - 1))
+        if UserDefaults.standard.bool(forKey: "blazeItFlame") {
+            self.smoker = KushSmokerLayer()
+            self.smoker?.gas = 0
+            self.smoker?.frame = self.view.bounds
+            self.view.layer.insertSublayer(self.smoker!, at: UInt32(self.view.layer.sublayers!.count - 1))
+        }
+
+        // player for dank and blunt mode
+        if UserDefaults.standard.bool(forKey: "dnbMode") {
+            guard let url = Bundle.main.url(forResource: "dnb", withExtension: "mp3") else {
+                fatalError("failed to get dnb.mp3")
+            }
+
+            do {
+                self.dnbPlayer = try AVAudioPlayer(contentsOf: url)
+                self.dnbPlayer?.numberOfLoops = -1
+            } catch {
+                Self.L.error("Failed to init dnb player: \(error)")
+            }
+        }
     }
     
     /**
@@ -147,7 +166,7 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
         }
         
         // set up smoker
-        self.smoker.frame = self.view.bounds
+        self.smoker?.frame = self.view.bounds
     }
     
     /**
@@ -174,6 +193,9 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
         // stop and disconnect device
         self.device.stop()
         self.btCentral.cancelPeripheralConnection(self.device.peripheral)
+
+        // stop dank and blunt
+        self.dnbPlayer?.stop()
     }
     
     // MARK: - UI Actions
@@ -212,9 +234,9 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
     private func updateFlame() {
         if self.device.heatingState != .ovenOff {
             let tempFraction = min(1, max(0.1, self.device.ovenTemp - 145) / 60)
-            self.smoker.gas = Double(tempFraction)
+            self.smoker?.gas = Double(tempFraction)
         } else {
-            self.smoker.gas = 0
+            self.smoker?.gas = 0
         }
     }
     
@@ -250,21 +272,26 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
                 switch newState {
                 case .cooling:
                     self.labelOvenState.text = Self.Localized("ovenMode.cooling")
+                    self.dnbPlayer?.stop()
                 
                 case .boosting:
                     self.labelOvenState.text = Self.Localized("ovenMode.boosting")
+                    self.dnbPlayer?.play()
                     
                 case .heating:
                     self.labelOvenState.text = Self.Localized("ovenMode.heating")
+                    self.dnbPlayer?.play()
                     
                 case .ovenOff:
                     self.labelOvenState.text = Self.Localized("ovenMode.ovenOff")
+                    self.dnbPlayer?.stop()
                     
                 case .ready:
                     self.labelOvenState.text = Self.Localized("ovenMode.ready")
                     
                 case .standby:
                     self.labelOvenState.text = Self.Localized("ovenMode.standby")
+                    self.dnbPlayer?.stop()
                     
                 default:
                     self.labelOvenState.text = "Unknown (\(newState.rawValue))"
