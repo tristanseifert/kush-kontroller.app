@@ -20,6 +20,11 @@ class PaxDevice: NSObject, CBPeripheralDelegate {
     /// UUID for the Pax devices' primary service
     public static let ServiceUuid = UUID(uuidString: "8E320200-64D2-11E6-BDF4-0800200C9A66")!
     
+    /// Shall packets be logged?
+    private static let LogPackets = false
+    /// Log the device key
+    private static let LogDeviceKey = false
+
     /// Peripheral representing the remote end of the BT LE connection
     internal var peripheral: CBPeripheral!
     
@@ -261,7 +266,11 @@ class PaxDevice: NSObject, CBPeripheralDelegate {
             let keyData = try cipher.encrypt(serialData.bytes)
             self.deviceKey = Data(keyData)
             
-            Self.L.trace("Device key is \(self.deviceKey.hexEncodedString())")
+#if DEBUG
+            if Self.LogDeviceKey {
+                Self.L.trace("Device key is \(self.deviceKey.hexEncodedString())")
+            }
+#endif
         } catch {
             Self.L.critical("Failed to derive device key: \(error.localizedDescription)")
         }
@@ -371,7 +380,9 @@ class PaxDevice: NSObject, CBPeripheralDelegate {
         let packetPlain = try packet.encode()
         let packetEncrypted = try self.encryptPacket(packetPlain)
         
-        Self.L.trace("<<< \(packetPlain.hexEncodedString()) encrypted \(packetEncrypted.hexEncodedString())")
+        if Self.LogPackets {
+            Self.L.trace("<<< \(packetPlain.hexEncodedString()) encrypted \(packetEncrypted.hexEncodedString())")
+        }
         self.peripheral.writeValue(packetEncrypted, for: self.writeCharacteristic, type: .withoutResponse)
     }
     
@@ -397,7 +408,10 @@ class PaxDevice: NSObject, CBPeripheralDelegate {
 
         do {
             let decrypted = try self.decryptPacket(data)
-            Self.L.trace(">>> \(decrypted.hexEncodedString())")
+
+            if Self.LogPackets {
+                Self.L.trace(">>> \(decrypted.hexEncodedString())")
+            }
             
             try self.processPacket(decrypted)
         } catch {

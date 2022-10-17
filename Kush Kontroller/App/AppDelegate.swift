@@ -16,6 +16,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      * @brief Application finished launching
      */
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // register user defaults
+        guard let url = Bundle.main.url(forResource: "Defaults", withExtension: "plist") else {
+            fatalError("failed to get defaults url")
+        }
+        guard let defaultsData = try? Data(contentsOf: url) else {
+            fatalError("failed to read defaults from \(url)")
+        }
+        guard let data = try? PropertyListSerialization.propertyList(from: defaultsData, format: nil),
+              let defaultsMap = data as? [String : Any] else {
+            fatalError("failed to decode defaults")
+        }
+
+        UserDefaults.standard.register(defaults: defaultsMap)
+
         // set up the data store
         let _ = DataStore.shared
         

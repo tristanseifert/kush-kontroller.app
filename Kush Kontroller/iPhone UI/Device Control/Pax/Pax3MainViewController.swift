@@ -33,9 +33,14 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
     /// Persistent device storage
     public var dbDevice: PersistentDevice! = nil
     
+    /// Set when automatic reconnection should be happening
+    private var autoReConnect = false
+
+    /// Parent/root view controller (for appearance restoration)
+    private var parentAppearanceController: UIViewController?
+
     /// Circular slider for temperature
     @IBOutlet var tempControl: PaxTempControl!
-    
     /// Label for current temperature
     @IBOutlet var labelTemp: UILabel!
     /// Label for set point temperature
@@ -131,16 +136,35 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.autoReConnect = true
+
         self.navigationItem.title = self.dbDevice.displayName
         
         // force dark mode
-        self.navigationController?.parent?.overrideUserInterfaceStyle = .dark
+        if let parent = self.navigationController?.parent {
+            parent.overrideUserInterfaceStyle = .dark
+            self.parentAppearanceController = parent
+        }
         
         // set up smoker
         self.smoker.frame = self.view.bounds
-        self.smoker.gas = 0
     }
     
+    /**
+     * @brief Restore default appearance
+     */
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        self.autoReConnect = false
+
+        // restore default appearance
+        if let parent = self.parentAppearanceController {
+            parent.overrideUserInterfaceStyle = .unspecified
+            self.parentAppearanceController = nil
+        }
+    }
+
     /**
      * @brief Shut down the device when we'll disappear
      */
@@ -150,9 +174,6 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
         // stop and disconnect device
         self.device.stop()
         self.btCentral.cancelPeripheralConnection(self.device.peripheral)
-        
-        // restore default appearance
-        self.navigationController?.parent?.overrideUserInterfaceStyle = .unspecified
     }
     
     // MARK: - UI Actions
@@ -332,9 +353,28 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
      * @brief Handle device disconnections
      */
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        Self.L.warning("Device \(peripheral) disconnected: \(error)")
-        
-        // TODO: try to reconnect
+        if self.autoReConnect {
+            Self.L.warning("Attempting reconnection for \(peripheral) (error: \(error))")
+            // TODO: try to reconnect instead
+            DispatchQueue.main.async {
+                let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+                alert.title = Self.Localized("alert.disconnected.title")
+                alert.message = Self.Localized("alert.disconnected.message")
+
+                alert.addAction(UIAlertAction(title: Self.Localized("alert.disconnected.dismiss"),
+                                              style: .default))
+
+                self.navigationController?.popViewController(animated: true)
+
+                if let coordinator = self.transitionCoordinator {
+                    coordinator.animateAlongsideTransition(in: nil, animation: { _ in
+                        self.navigationController?.parent?.present(alert, animated: true)
+                    })
+                } else {
+                    self.navigationController?.parent?.present(alert, animated: true)
+                }
+            }
+        }
     }
     
     // MARK: - Helpers

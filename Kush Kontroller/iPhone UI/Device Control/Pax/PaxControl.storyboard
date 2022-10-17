@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fvq-ZQ-yNy" customClass="PaxTempControl" customModule="Kush_Kontroller" customModuleProvider="target">
-                                <rect key="frame" x="10" y="113" width="373" height="373"/>
+                                <rect key="frame" x="10" y="108" width="373" height="373"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Fvq-ZQ-yNy" secondAttribute="height" multiplier="1:1" id="0D1-ae-yMD"/>
@@ -50,7 +50,7 @@
                                 </connections>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1jd-f3-nqG">
-                                <rect key="frame" x="0.0" y="486" width="393" height="38.666666666666629"/>
+                                <rect key="frame" x="0.0" y="481" width="393" height="38.666666666666629"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tde-bj-Ezn" userLabel="Heater State">
                                         <rect key="frame" x="0.0" y="0.0" width="131" height="38.666666666666664"/>
@@ -72,7 +72,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hF0-64-UQ4" userLabel="Current Temp">
                                         <rect key="frame" x="131" y="0.0" width="131" height="38.666666666666664"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CURRENT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zyt-xb-Hf3">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ACTUAL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zyt-xb-Hf3">
                                                 <rect key="frame" x="0.0" y="0.0" width="131" height="19.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <color key="textColor" systemColor="secondaryLabelColor"/>
@@ -106,12 +106,12 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="eX2-Sc-8wN">
-                                <rect key="frame" x="0.0" y="544.66666666666663" width="393" height="38.666666666666629"/>
+                                <rect key="frame" x="0.0" y="539.66666666666663" width="393" height="38.666666666666629"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="m3C-dc-mDH" userLabel="Current Temp">
                                         <rect key="frame" x="0.0" y="0.0" width="196.66666666666666" height="38.666666666666664"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHARGE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R8W-4K-XPx">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="POWER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R8W-4K-XPx">
                                                 <rect key="frame" x="0.0" y="0.0" width="196.66666666666666" height="19.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <color key="textColor" systemColor="secondaryLabelColor"/>
@@ -145,7 +145,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kf5-5o-0Ki">
-                                <rect key="frame" x="146" y="603.33333333333337" width="101.33333333333331" height="34.333333333333371"/>
+                                <rect key="frame" x="146" y="598.33333333333337" width="101.33333333333331" height="34.333333333333371"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Mode: ???"/>
                             </button>
@@ -161,7 +161,7 @@
                         <constraints>
                             <constraint firstItem="DMM-VO-z9C" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="0zP-DP-L8c"/>
                             <constraint firstItem="1jd-f3-nqG" firstAttribute="top" secondItem="Fvq-ZQ-yNy" secondAttribute="bottom" id="1xU-wO-cUh"/>
-                            <constraint firstItem="Fvq-ZQ-yNy" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="4tB-cY-chw"/>
+                            <constraint firstItem="Fvq-ZQ-yNy" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="4tB-cY-chw"/>
                             <constraint firstItem="kf5-5o-0Ki" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="5tP-oK-ECD"/>
                             <constraint firstAttribute="bottom" secondItem="DMM-VO-z9C" secondAttribute="bottom" constant="20" id="A13-XA-Pob"/>
                             <constraint firstItem="eX2-Sc-8wN" firstAttribute="top" secondItem="1jd-f3-nqG" secondAttribute="bottom" constant="20" id="Nnq-HK-cq3"/>

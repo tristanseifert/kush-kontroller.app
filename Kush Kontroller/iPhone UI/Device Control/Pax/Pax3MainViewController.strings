@@ -11,7 +11,7 @@
 "ovenMode.boosting" = "Boost";
 "ovenMode.ovenOff" = "Powered Off";
 "ovenMode.ready" = "Ready";
-"ovenMode.standby" = "Standby";
+"ovenMode.standby" = "Cooling";
 
 "chargeState.unknown" = "Unknown";
 "chargeState.notCharging" = "Not Charging";
@@ -29,3 +29,7 @@
 "dynamicMode.button.title.efficiency" = "Mode: Efficiency";
 "dynamicMode.button.title.flavor" = "Mode: Flavor";
 "dynamicMode.button.title.stealth" = "Mode: Stealth";
+
+"alert.disconnected.title" = "Device Disconnected";
+"alert.disconnected.message" = "The device has been disconnected unexpectedly.\n\nEnsure that it's powered on, and connectable and try again.";
+"alert.disconnected.dismiss" = "Dismiss";

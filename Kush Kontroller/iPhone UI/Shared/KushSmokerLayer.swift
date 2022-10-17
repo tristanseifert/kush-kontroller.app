@@ -64,6 +64,9 @@ class KushSmokerLayer: CALayer {
                                            options: [.new], changeHandler: { view, change in
             self.updateFrames()
         })
+
+        self.updateFlame(0)
+        self.updateFrames()
     }
     
     /**
