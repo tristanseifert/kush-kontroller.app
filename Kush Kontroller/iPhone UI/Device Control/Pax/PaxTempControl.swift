@@ -2,8 +2,6 @@
 //  PaxTempControl.swift
 //  Kush Kontroller
 //
-//  Based on SVCircularSlider (released under MIT license)
-//
 //  Created by Tristan Seifert on 20221015.
 //
 
@@ -24,7 +22,12 @@ public class PaxTempControl: UIControl {
     static let TrackEndAngle: CGFloat = .pi / 4
     /// Maximum value the slider can change in a single touch event (percent)
     static let TouchMoveThreshold = 0.2
-    
+
+    /// Haptic feedback generator
+    private var feedbackGenerator: UISelectionFeedbackGenerator? = nil
+    /// Value at which we last generated a change
+    private var lastFeedbackValue: CGFloat? = nil
+
     // MARK: Configurables
     /// Color of the knob
     @IBInspectable public var knobColor: UIColor = .gray  {
@@ -165,6 +168,13 @@ public class PaxTempControl: UIControl {
             return false
         }
         
+        // create haptic feedback boi
+        let boi = UISelectionFeedbackGenerator()
+        boi.prepare()
+
+        self.feedbackGenerator = boi
+        self.lastFeedbackValue = nil
+
         // emit events and update the value
         self.sendActions(for: .editingDidBegin)
         self.setValueFromPosition(touchPos)
@@ -183,6 +193,15 @@ public class PaxTempControl: UIControl {
         // update slider value
         self.setValueFromPosition(touchPos)
         
+        // secrete haptic iff value changed sufficiently
+        if self.lastFeedbackValue == nil || abs(self.lastFeedbackValue! - self.value) >= 0.5 {
+            if let fg = self.feedbackGenerator {
+                fg.selectionChanged()
+                fg.prepare()
+            }
+            self.lastFeedbackValue = self.value
+        }
+
         // TODO: is this ever not true?
         return true
     }
@@ -198,6 +217,9 @@ public class PaxTempControl: UIControl {
         
         // emit events
         self.sendActions(for: .editingDidEnd)
+
+        self.feedbackGenerator = nil
+        self.lastFeedbackValue = nil
     }
     
     /**

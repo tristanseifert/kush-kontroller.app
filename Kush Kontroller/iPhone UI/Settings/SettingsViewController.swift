@@ -19,10 +19,10 @@ class SettingsViewController: Eureka.FormViewController {
     static let L = Logger(subsystem: "me.blraaz.kushkontroller", category: "DeviceInfoViewController")
     
     override func viewDidLoad() {
+        self.tableViewStyle = .insetGrouped
+        
         super.viewDidLoad()
-        
-        
-        
+
         // Dank and blunt mode
         form +++ Section(header: Self.Localized("section.chill.title"),
                          footer: Self.Localized("section.chill.footer"))

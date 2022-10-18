@@ -348,6 +348,22 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
                 }
             }
         })
+        self.deviceListeners.append(self.device.$validTempRange.sink { range in
+            DispatchQueue.main.async {
+                if let range = range {
+                    self.tempControl.minValue = range.lowerBound
+                    self.tempControl.maxValue = range.upperBound
+
+                    Self.L.trace("New heater range: \(range)")
+                }
+            }
+        })
+
+        // also update some state
+        if let range = self.device.validTempRange {
+            self.tempControl.minValue = range.lowerBound
+            self.tempControl.maxValue = range.upperBound
+        }
     }
     
     /**

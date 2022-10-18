@@ -68,6 +68,9 @@ class PaxDevice: NSObject, CBPeripheralDelegate {
     /// Current charge state
     @Published private(set) public var chargeState: ChargeState = .unknown
     
+    /// Heater setting ranges
+    @Published internal(set) public var validTempRange: ClosedRange<Double>?
+
     // MARK: - Initialization
     /**
      * Initializes the Pax device based on a Bluetooth peripheral, which has already been connected to.
@@ -448,7 +451,7 @@ class PaxDevice: NSObject, CBPeripheralDelegate {
                 self.supportedAttributes = message.attributes
 
             default:
-                Self.L.warning("Received Pax message with unknown type \(packet[0])")
+            Self.L.warning("Received Pax message with unknown type \(packet[0]): \(packet.hexEncodedString())")
         }
     }
     
