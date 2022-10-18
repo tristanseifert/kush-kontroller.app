@@ -28,6 +28,7 @@ class Pax3Device: PaxDevice {
     // MARK: - Initialization
     override init(_ peripheral: CBPeripheral) {
         super.init(peripheral)
+        // from iOS app UI (these may not be totally correct?)
         self.validTempRange = 175.0...215.0
         self.type = .Pax3
     }
