@@ -1,0 +1,16 @@
+/* 
+  PaxEraMainViewController.strings
+  Kush Kontroller
+
+  Created by Tristan Seifert on 20221018.
+  
+*/
+
+"chargeState.unknown" = "Unknown";
+"chargeState.notCharging" = "Not Charging";
+"chargeState.charging" = "Charging";
+"chargeState.chargingCompleted" = "Fully Charged";
+
+"alert.disconnected.title" = "Device Disconnected";
+"alert.disconnected.message" = "The device has been disconnected unexpectedly.\n\nEnsure that it's powered on, and connectable and try again.\n\nEventually, we'll support automatic reconnection…";
+"alert.disconnected.dismiss" = "Dismiss";

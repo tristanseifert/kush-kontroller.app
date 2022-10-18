@@ -144,6 +144,7 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
      * @brief Load display config
      */
     private func loadDisplayConfig() {
+        // TODO: read from user defaults
         self.tempControl.unit = .celsius
     }
     
@@ -262,8 +263,10 @@ class Pax3MainViewController: UIViewController, CBCentralManagerDelegate {
             }
         })
         self.deviceListeners.append(self.device.$ovenSetTemp.sink { newTemp in
-            DispatchQueue.main.async {
-                self.tempControl.value = Double(newTemp)
+            if !newTemp.isNaN {
+                DispatchQueue.main.async {
+                    self.tempControl.value = Double(newTemp)
+                }
             }
         })
         

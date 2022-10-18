@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Device Name-->
+        <!--Device Name (Pax 3)-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController storyboardIdentifier="InitialPax3" hidesBottomBarWhenPushed="YES" id="Y6W-OH-hqX" customClass="Pax3MainViewController" customModule="Kush_Kontroller" customModuleProvider="target" sceneMemberID="viewController">
@@ -174,7 +174,7 @@
                             <constraint firstItem="kf5-5o-0Ki" firstAttribute="top" secondItem="eX2-Sc-8wN" secondAttribute="bottom" constant="20" id="yJz-6f-wwS"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Device Name" id="xfU-RJ-pD1">
+                    <navigationItem key="navigationItem" title="Device Name (Pax 3)" id="xfU-RJ-pD1">
                         <barButtonItem key="backBarButtonItem" title="Disconnect" id="8Qy-vf-dGg"/>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
@@ -192,6 +192,110 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="135.1145038167939" y="-17.605633802816904"/>
+        </scene>
+        <!--Device Name (Pax Era)-->
+        <scene sceneID="tqe-4L-YSy">
+            <objects>
+                <viewController storyboardIdentifier="InitialPaxEra" id="Kzi-VR-mLt" customClass="PaxEraMainViewController" customModule="Kush_Kontroller" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="R2J-VW-92D">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Gv-WP-ABg" customClass="PaxTempControl" customModule="Kush_Kontroller" customModuleProvider="target">
+                                <rect key="frame" x="10" y="108" width="373" height="373"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
+                                        <real key="value" value="48"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                        <real key="value" value="220"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                        <real key="value" value="420"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="value">
+                                        <real key="value" value="220"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="knobWidth">
+                                        <real key="value" value="70"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                                        <real key="value" value="56"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="tempChanged:" destination="Kzi-VR-mLt" eventType="editingDidEnd" id="Z3W-mr-7E8"/>
+                                </connections>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gtH-jD-bR2">
+                                <rect key="frame" x="0.0" y="481" width="393" height="38.666666666666629"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1jp-Ln-0Su" userLabel="Current Temp">
+                                        <rect key="frame" x="0.0" y="0.0" width="196.66666666666666" height="38.666666666666664"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="POWER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Sp-sF-80C">
+                                                <rect key="frame" x="0.0" y="0.0" width="196.66666666666666" height="19.333333333333332"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="???" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="an2-kZ-u4S">
+                                                <rect key="frame" x="0.0" y="19.333333333333314" width="196.66666666666666" height="19.333333333333329"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="p4V-jf-5OI" userLabel="Heater State">
+                                        <rect key="frame" x="196.66666666666663" y="0.0" width="196.33333333333337" height="38.666666666666664"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BATTERY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IQB-Nx-6ZJ">
+                                                <rect key="frame" x="0.0" y="0.0" width="196.33333333333334" height="19.333333333333332"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="???" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rJh-ix-S4h">
+                                                <rect key="frame" x="0.0" y="19.333333333333314" width="196.33333333333334" height="19.333333333333329"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="v1c-op-iPN"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="0Gv-WP-ABg" firstAttribute="width" secondItem="0Gv-WP-ABg" secondAttribute="height" multiplier="1:1" id="0m4-cL-CCc"/>
+                            <constraint firstItem="0Gv-WP-ABg" firstAttribute="top" secondItem="v1c-op-iPN" secondAttribute="top" constant="5" id="9LS-qz-OXU"/>
+                            <constraint firstItem="v1c-op-iPN" firstAttribute="trailing" secondItem="gtH-jD-bR2" secondAttribute="trailing" id="9RD-MI-AZl"/>
+                            <constraint firstItem="0Gv-WP-ABg" firstAttribute="leading" secondItem="v1c-op-iPN" secondAttribute="leading" constant="10" id="HdH-Gf-mCt"/>
+                            <constraint firstItem="gtH-jD-bR2" firstAttribute="leading" secondItem="v1c-op-iPN" secondAttribute="leading" id="SBB-SD-IjI"/>
+                            <constraint firstItem="gtH-jD-bR2" firstAttribute="top" secondItem="0Gv-WP-ABg" secondAttribute="bottom" id="TIn-F9-hLZ"/>
+                            <constraint firstItem="v1c-op-iPN" firstAttribute="trailing" secondItem="0Gv-WP-ABg" secondAttribute="trailing" constant="10" id="Vbf-1X-pNA"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Device Name (Pax Era)" id="3gQ-Kz-qEk">
+                        <barButtonItem key="backBarButtonItem" title="Disconnect" id="HNB-xD-mq8"/>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="labelBatteryPercent" destination="rJh-ix-S4h" id="Ir3-DG-JUf"/>
+                        <outlet property="labelChargeState" destination="an2-kZ-u4S" id="Eri-RT-LhC"/>
+                        <outlet property="tempControl" destination="0Gv-WP-ABg" id="NNF-ev-67L"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ecy-tB-csB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="135" y="669"/>
         </scene>
     </scenes>
     <resources>

@@ -11,6 +11,10 @@ import OSLog
 
 import JGProgressHUD
 
+// TODO: show placeholder when there's no devices
+/**
+ * @brief Lists devices the user has connected
+ */
 class DeviceTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     /// Logging instance for this view controller
     static let L = Logger(subsystem: "me.blraaz.kushkontroller", category: "DeviceTableViewController")
@@ -360,10 +364,19 @@ class DeviceTableViewController: UITableViewController, NSFetchedResultsControll
             vc.dbDevice = dbDevice
             vc.device = pax3
             
-            self.navigationController?.pushViewController(vc, animated:true)
+            self.navigationController!.pushViewController(vc, animated:true)
             
         case .PaxEra:
-            fatalError("Pax Era view not yet implemented: device=\(device)")
+            guard let paxEra = device as? PaxEraDevice else {
+                fatalError("type is pax era, but class is wrong?")
+            }
+
+            let vc = sb.instantiateViewController(withIdentifier: "InitialPaxEra") as! PaxEraMainViewController
+            vc.btCentral = central
+            vc.dbDevice = dbDevice
+            vc.device = paxEra
+
+            self.navigationController!.pushViewController(vc, animated:true)
             
         default:
             fatalError("invalid Pax device type: \(device.type)")
